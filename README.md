@@ -1,4 +1,4 @@
-[Uploading 000.html…]()
+[Uploading 0909.html…]()
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
@@ -67,6 +67,9 @@
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         Asistente Integro 100% Autónomo (Sin Internet / Sin API)
                     </span>
+                    <button onclick="descargarCodigoPagina()" class="py-1 px-3 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-download"></i> Descargar Web App
+                    </button>
                 </div>
             </div>
         </div>
@@ -97,6 +100,9 @@
                 </button>
                 <button onclick="changeTab('ia')" id="tab-ia" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
                     <i class="fa-solid fa-robot text-indigo-400"></i> Tutor IA Pro
+                </button>
+                <button onclick="changeTab('descargar')" id="tab-descargar" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
+                    <i class="fa-solid fa-mobile-screen-button text-emerald-400"></i> Instalar / APK
                 </button>
                 <button onclick="changeTab('qr')" id="tab-qr" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
                     <i class="fa-solid fa-qrcode text-rose-400"></i> Código QR
@@ -689,6 +695,67 @@
             </div>
         </section>
 
+        <!-- PESTAÑA: INSTALAR APP / APK PWA -->
+        <section id="content-descargar" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl">
+                        <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Instalar en Teléfono / Descargar la App</h2>
+                        <p class="text-sm text-slate-500">Convierte este sitio en una App móvil (PWA) sin necesidad de tienda de aplicaciones</p>
+                    </div>
+                </div>
+
+                <!-- Opciones de descarga/instalación -->
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide flex items-center gap-1 mb-2">
+                                <i class="fa-brands fa-android text-base"></i> Opción 1: Instalar en Android / Móvil
+                            </span>
+                            <h3 class="font-bold text-slate-800 mb-2">Aplicación Web Progresiva (PWA)</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                En Android / Chrome, puedes guardar la aplicación directamente en la pantalla de inicio para usarla como una aplicación nativa completa sin Internet.
+                            </p>
+                            <ol class="text-xs text-slate-600 space-y-1.5 list-decimal list-inside mb-4">
+                                <li>Abre el menú del navegador (3 puntos en la esquina superior derecha).</li>
+                                <li>Selecciona <b>"Agregar a la pantalla principal"</b> o <b>"Instalar aplicación"</b>.</li>
+                                <li>¡Listo! Aparecerá un icono directo en tus aplicaciones de Android.</li>
+                            </ol>
+                        </div>
+                        <button onclick="instalarPWA()" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Instalar Aplicación Ahora
+                        </button>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wide flex items-center gap-1 mb-2">
+                                <i class="fa-solid fa-file-arrow-down text-base"></i> Opción 2: Descargar Archivo Autónomo
+                            </span>
+                            <h3 class="font-bold text-slate-800 mb-2">Archivo Offline (.html / PWA)</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Descarga todo el código fuente y tutor de inteligencia artificial en un único archivo. Funciona de manera 100% autónoma en cualquier computadora o celular sin conexión a internet.
+                            </p>
+                        </div>
+                        <button onclick="descargarCodigoPagina()" class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-code"></i> Descargar HTML Completo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-start gap-3">
+                    <i class="fa-solid fa-circle-info text-amber-600 text-base mt-0.5"></i>
+                    <div>
+                        <b>¿Por qué PWA en lugar de un archivo APK traducido?</b>
+                        <p class="mt-0.5">Las Aplicaciones Web Progresivas (PWA) no requieren permisos de instalación desconocidos ni virus, consumen menos espacio y funcionan exactamente igual que una APK nativa en teléfonos Android y dispositivos móviles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Pie de página -->
@@ -701,6 +768,40 @@
 
     <!-- LÓGICA EN JAVASCRIPT -->
     <script>
+        // Registrar Evento PWA para Instalación Móvil Directa
+        let deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function instalarPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('El usuario aceptó instalar la PWA');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('Para instalar la app en tu dispositivo móvil:\n\n1. En Chrome, toca los 3 puntos arriba a la derecha.\n2. Toca "Agregar a la pantalla principal" o "Instalar Aplicación".');
+            }
+        }
+
+        // Función para descargar la Web App completa de forma autónoma
+        function descargarCodigoPagina() {
+            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'CompuPrep181_App_Offline.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }
+
         // Función para actualizar la vista previa interactiva en la pestaña Word
         function actualizarDemoWord() {
             const color = document.getElementById('demo-text-color').value;
