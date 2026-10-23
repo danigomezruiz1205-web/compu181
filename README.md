@@ -1,885 +1,836 @@
-[889.html](https://github.com/user-attachments/files/33849834/889.html)
+[Uploading aprende_computaci_n_b_sica_preparatoria (3.html…]()
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es-MX" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprende Computación Básica - Preparatoria</title>
+    <title>Aprende Computación Básica - Preparatoria 181</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
+    <!-- FontAwesome para Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- QRCode.js Library -->
+    <!-- QRCode.js para generación de QR en tiempo real -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tipografía Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        body { 
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; 
             background-color: #f8fafc;
             color: #1e293b;
         }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Animaciones para el minijuego y quizzes */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-6px); }
-            40%, 80% { transform: translateX(6px); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
         }
-        .animate-shake {
-            animation: shake 0.4s ease-in-out;
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+
+        .btn-correct {
+            background-color: #16a34a !important;
+            color: #ffffff !important;
+            border-color: #15803d !important;
         }
-        .tab-btn.active {
-            background-color: #2563eb;
-            color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        .btn-wrong {
+            background-color: #dc2626 !important;
+            color: #ffffff !important;
+            border-color: #b91c1c !important;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
-    <!-- Encabezado / Navbar -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <div class="bg-blue-600 p-2 rounded-xl text-white">
-                        <i class="fa-solid fa-laptop-code text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-lg leading-tight">CompuPrep 181</h1>
-                        <p class="text-xs text-slate-400">Portal de Computación Básica e Informática</p>
-                    </div>
+    <!-- Encabezado Estilo Portal Escolar Real -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('inicio')">
+                <div class="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center text-white shadow-sm font-bold text-lg">
+                    <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <div class="hidden md:flex items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Asistente IA Offline Activo
-                    </span>
+                <div>
+                    <h1 class="text-base font-bold text-slate-900 leading-tight">Materia de Computación I</h1>
+                    <p class="text-xs text-slate-500">Preparatoria No. 181 • Apoyos de Clase</p>
                 </div>
             </div>
+
+            <!-- Acciones de Cabecera -->
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleQRModal()" class="inline-flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-lg transition border border-slate-200">
+                    <i class="fa-solid fa-qrcode text-slate-500"></i>
+                    <span>Abrir en celular (QR)</span>
+                </button>
+            </div>
         </div>
-        
-        <!-- Menú de Pestañas Navegables -->
-        <nav class="bg-slate-800 border-t border-slate-700/50 overflow-x-auto scrollbar-none">
-            <div class="max-w-7xl mx-auto px-4 flex gap-2 py-2 min-w-max">
-                <button onclick="changeTab('word')" id="tab-word" class="tab-btn active px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-file-word text-blue-400"></i> Word
+
+        <!-- Menú de Navegación Pestañas -->
+        <nav class="bg-slate-100/80 border-t border-slate-200 overflow-x-auto scrollbar-none">
+            <div class="max-w-7xl mx-auto px-2 flex space-x-1 min-w-max py-1 text-xs sm:text-sm font-medium text-slate-600">
+                <button onclick="switchTab('inicio')" id="nav-inicio" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5 active">
+                    <i class="fa-solid fa-house text-slate-400"></i> Inicio
                 </button>
-                <button onclick="changeTab('excel')" id="tab-excel" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-file-excel text-emerald-400"></i> Excel
+                <button onclick="switchTab('word')" id="nav-word" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-word text-blue-600"></i> Word
                 </button>
-                <button onclick="changeTab('powerpoint')" id="tab-powerpoint" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-file-powerpoint text-orange-400"></i> PowerPoint
+                <button onclick="switchTab('excel')" id="nav-excel" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-excel text-emerald-600"></i> Excel
                 </button>
-                <button onclick="changeTab('libros')" id="tab-libros" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-book-bookmark text-amber-400"></i> Guías y Libros
+                <button onclick="switchTab('powerpoint')" id="nav-powerpoint" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-powerpoint text-orange-600"></i> PowerPoint
                 </button>
-                <button onclick="changeTab('atajos')" id="tab-atajos" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-keyboard text-purple-400"></i> Atajos de Teclado
+                <button onclick="switchTab('seguridad')" id="nav-seguridad" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-indigo-600"></i> Internet y Nube
                 </button>
-                <button onclick="changeTab('juego')" id="tab-juego" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-gamepad text-pink-400"></i> Desafío Atajos
+                <button onclick="switchTab('libros')" id="nav-libros" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-bookmark text-amber-600"></i> Guías y Libros
                 </button>
-                <button onclick="changeTab('quiz')" id="tab-quiz" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Quiz Evaluativo
+                <button onclick="switchTab('atajos')" id="nav-atajos" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-keyboard text-slate-500"></i> Atajos
                 </button>
-                <button onclick="changeTab('ia')" id="tab-ia" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-robot text-indigo-400"></i> Preguntas a IA
+                <button onclick="switchTab('juego')" id="nav-juego" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad text-purple-600"></i> Minijuego
                 </button>
-                <button onclick="changeTab('qr')" id="tab-qr" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-qrcode text-rose-400"></i> Código QR
+                <button onclick="switchTab('quiz')" id="nav-quiz" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-check-double text-teal-600"></i> Quiz Repaso
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- Contenido Principal -->
-    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
-        <!-- PESTAÑA: WORD -->
-        <section id="content-word" class="tab-content block space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="bg-blue-100 text-blue-600 p-3 rounded-xl">
-                        <i class="fa-solid fa-file-word text-2xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">Procesador de Textos: Microsoft Word</h2>
-                        <p class="text-sm text-slate-500">Fundamentos de edición, formatos académicos y estructura de documentos</p>
+        <!-- 1. PESTAÑA: INICIO -->
+        <section id="tab-inicio" class="tab-content active space-y-8">
+            <!-- Banner de Bienvenida -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
+                <div class="max-w-3xl relative z-10 space-y-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                        <i class="fa-solid fa-circle-info"></i> Material de Apoyo Semestral
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Guía Práctica de Herramientas Digitales para Bachillerato</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        Este espacio reúne las explicaciones sencillas, reglas clave y ejercicios resueltos para las clases de cómputo. Aquí encuentras lo necesario para entregar tus trabajos escolares con buen formato en Word, hacer tablas en Excel, diseñar diapositivas legibles en PowerPoint y buscar información confiable en Internet.
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="switchTab('word')" class="bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition shadow-sm inline-flex items-center gap-2">
+                            <span>Ver Temario de Word</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                        <button onclick="switchTab('juego')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2.5 rounded-xl transition border border-slate-200 inline-flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-purple-600"></i>
+                            <span>Probar Minijuego de Atajos</span>
+                        </button>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <h3 class="font-semibold text-slate-700 mb-2"><i class="fa-solid fa-check-circle text-blue-500 mr-2"></i>Formato de Trabajos Escolares</h3>
-                        <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside">
-                            <li><b>Márgenes oficiales:</b> 2.54 cm por cada lado (Estándar APA).</li>
-                            <li><b>Tipografía recomendada:</b> Arial 11pt, Calibri 11pt o Times New Roman 12pt.</li>
-                            <li><b>Interlineado:</b> 1.5 o 2.0 líneas según la indicación del profesor.</li>
-                            <li><b>Alineación:</b> Izquierda con sangría de primera línea en párrafos principales.</li>
-                        </ul>
+            </div>
+
+            <!-- Accesos Rápidos por Módulo -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div onclick="switchTab('word')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition cursor-pointer space-y-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-word text-lg"></i>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <h3 class="font-semibold text-slate-700 mb-2"><i class="fa-solid fa-list-ol text-blue-500 mr-2"></i>Índices Automáticos</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-2">
-                            Para evitar hacer un índice de forma manual, utiliza los <b>Estilos de Título</b>:
-                        </p>
-                        <ol class="text-sm text-slate-600 space-y-1 list-decimal list-inside">
-                            <li>Selecciona tus temas y aplica el estilo <b>Título 1</b> o <b>Título 2</b> en la pestaña <i>Inicio</i>.</li>
-                            <li>Coloca el cursor donde irá tu índice.</li>
-                            <li>Ve a la pestaña <b>Referencias</b> &gt; <b>Tabla de contenido</b> &gt; Selecciona <i>Tabla automática</i>.</li>
+                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Procesador Word</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Aprende a configurar formato APA, índices automáticos, saltos de página y márgenes oficiales para reportes.</p>
+                </div>
+
+                <div onclick="switchTab('excel')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-md transition cursor-pointer space-y-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-excel text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">Hojas de Excel</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Fórmulas básicas (=PROMEDIO, =SUMA, =SI), formato condicional y cómo construir tablas claras de datos.</p>
+                </div>
+
+                <div onclick="switchTab('powerpoint')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-orange-300 hover:shadow-md transition cursor-pointer space-y-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold group-hover:bg-orange-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-powerpoint text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-orange-600 transition">Presentaciones PPT</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Aplica la regla 6x6, selecciona contrastes de color adecuados y evita diapositivas cargadas de texto.</p>
+                </div>
+
+                <div onclick="switchTab('seguridad')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-indigo-300 hover:shadow-md transition cursor-pointer space-y-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold group-hover:bg-indigo-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-shield-halved text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition">Internet y Nube</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Búsquedas avanzadas en Google, gestión de archivos en Drive/OneDrive y protección contra phishing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PESTAÑA: WORD -->
+        <section id="tab-word" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-file-word"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Microsoft Word: Formato y Reportes Escolares</h2>
+                        <p class="text-xs text-slate-500">Pasos prácticos para entregar trabajos limpios y con buena estructura.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Tarjeta 1 -->
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-list-ol text-blue-600"></i> Generar Índice Automático
+                        </h3>
+                        <ol class="list-decimal list-inside text-xs text-slate-600 space-y-1">
+                            <li>Aplica el estilo <strong>"Título 1"</strong> a los temas principales y <strong>"Título 2"</strong> a los subtemas desde la pestaña <i>Inicio</i>.</li>
+                            <li>Coloca el cursor al inicio del documento o en una hoja en blanco.</li>
+                            <li>Ve a la pestaña <strong>Referencias</strong> &gt; <strong>Tabla de contenido</strong> y selecciona la opción deseada.</li>
+                            <li>Si agregas más información después, haz clic derecho sobre el índice y presiona <strong>"Actualizar campos"</strong>.</li>
                         </ol>
                     </div>
+
+                    <!-- Tarjeta 2 -->
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-paragraph text-blue-600"></i> Estructura Básica de Formato (Estilo Escolar)
+                        </h3>
+                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1">
+                            <li><strong>Tipografía recomendada:</strong> Arial 11 pt, Calibri 11 pt o Times New Roman 12 pt.</li>
+                            <li><strong>Interlineado:</strong> 1.5 líneas para facilitar la revisión del profesor.</li>
+                            <li><strong>Alineación:</strong> Texto justificado (Ctrl + J) para cuerpo general; títulos alineados a la izquierda.</li>
+                            <li><strong>Márgenes:</strong> Estándar de 2.5 cm en los cuatro bordes (Superior, Inferior, Izquierdo, Derecho).</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA: EXCEL -->
-        <section id="content-excel" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl">
-                        <i class="fa-solid fa-file-excel text-2xl"></i>
+        <!-- 3. PESTAÑA: EXCEL -->
+        <section id="tab-excel" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-file-excel"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800">Hojas de Cálculo: Microsoft Excel</h2>
-                        <p class="text-sm text-slate-500">Fórmulas básicas, condicionales y simulador dinámico de promedios</p>
+                        <h2 class="text-xl font-bold text-slate-900">Microsoft Excel: Tablas y Fórmulas Básicas</h2>
+                        <p class="text-xs text-slate-500">Aprende la sintaxis de las funciones principales para resolver tareas numéricas.</p>
                     </div>
                 </div>
 
-                <!-- Simulador de Promedios -->
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 mb-6">
-                    <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-calculator text-emerald-600"></i> Simulador Interactivo de Calificaciones (=PROMEDIO y =SI)
+                <!-- Explicación de Fórmulas -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-slate-200 rounded-xl p-4 bg-emerald-50/50 space-y-2">
+                        <span class="font-mono text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">=SUMA(A1:A10)</span>
+                        <p class="text-xs text-slate-600 leading-relaxed">Suma todos los valores numéricos que se encuentran dentro del rango seleccionado.</p>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4 bg-emerald-50/50 space-y-2">
+                        <span class="font-mono text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">=PROMEDIO(B1:B5)</span>
+                        <p class="text-xs text-slate-600 leading-relaxed">Calcula la media aritmética del grupo de celdas indicadas.</p>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4 bg-emerald-50/50 space-y-2">
+                        <span class="font-mono text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">=SI(C1&gt;=6, "Aprobado", "Reprobado")</span>
+                        <p class="text-xs text-slate-600 leading-relaxed">Evalúa una condición lógica y devuelve un texto según el resultado.</p>
+                    </div>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE PROMEDIOS DE EXCEL -->
+                <div class="border border-emerald-200 bg-white rounded-xl p-5 space-y-4">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-emerald-600"></i> Simulador Interactivo de Calificaciones en Excel
                     </h3>
-                    <p class="text-sm text-slate-600 mb-4">Ingresa 3 calificaciones para calcular automáticamente el promedio y determinar la condición académica usando la fórmula <code>=SI(PROMEDIO&gt;=6, "Aprobado", "Reprobado")</code>.</p>
+                    <p class="text-xs text-slate-500">Ingresa tres calificaciones hipotéticas para simular cómo Excel calcula el promedio final y evalúa la condición de aprobación automáticamente.</p>
                     
-                    <div class="grid sm:grid-cols-3 gap-4 mb-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Parcial 1</label>
-                            <input type="number" id="calif1" min="0" max="10" value="8" oninput="calcularPromedio()" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg font-medium text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Parcial 1 (A2)</label>
+                            <input type="number" id="calc-p1" min="0" max="10" value="8" oninput="calcularSimuladorExcel()" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Parcial 2</label>
-                            <input type="number" id="calif2" min="0" max="10" value="7" oninput="calcularPromedio()" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg font-medium text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Parcial 2 (B2)</label>
+                            <input type="number" id="calc-p2" min="0" max="10" value="7" oninput="calcularSimuladorExcel()" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Examen Final</label>
-                            <input type="number" id="calif3" min="0" max="10" value="5" oninput="calcularPromedio()" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg font-medium text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Parcial 3 (C2)</label>
+                            <input type="number" id="calc-p3" min="0" max="10" value="5" oninput="calcularSimuladorExcel()" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                     </div>
 
-                    <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
-                        <div>
-                            <span class="text-xs text-slate-500 block">Promedio Final Obtenido:</span>
-                            <span id="res-promedio" class="text-2xl font-extrabold text-slate-800">6.67</span>
+                    <div class="bg-slate-900 text-slate-100 rounded-xl p-4 space-y-2 text-xs font-mono">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-slate-400">Fórmula ejecutada:</span>
+                            <span class="text-emerald-400 font-bold">=PROMEDIO(A2:C2)</span>
                         </div>
-                        <div>
-                            <span class="text-xs text-slate-500 block">Resultado Función =SI:</span>
-                            <span id="res-estatus" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">APROBADO</span>
+                        <div class="flex justify-between items-center">
+                            <span>Promedio Resultante:</span>
+                            <span id="res-promedio" class="text-lg font-bold text-white">6.6</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-800 pt-2">
+                            <span>Evaluación =SI(Promedio&gt;=6, "Aprobado", "Reprobado"):</span>
+                            <span id="res-estatus" class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900 text-emerald-300">Aprobado</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA: POWERPOINT -->
-        <section id="content-powerpoint" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="bg-orange-100 text-orange-600 p-3 rounded-xl">
-                        <i class="fa-solid fa-file-powerpoint text-2xl"></i>
+        <!-- 4. PESTAÑA: POWERPOINT -->
+        <section id="tab-powerpoint" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-file-powerpoint"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800">Presentaciones Digitales: PowerPoint</h2>
-                        <p class="text-sm text-slate-500">Reglas de diseño visual, contraste y exposición efectiva</p>
+                        <h2 class="text-xl font-bold text-slate-900">Microsoft PowerPoint: Exposición y Diapositivas</h2>
+                        <p class="text-xs text-slate-500">Reglas clave para crear presentaciones claras que no aburran al grupo.</p>
                     </div>
                 </div>
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="p-4 rounded-xl bg-orange-50/50 border border-orange-100">
-                        <h3 class="font-bold text-orange-900 mb-1">La Regla del 6x6</h3>
-                        <p class="text-sm text-slate-600">Máximo 6 líneas de texto por diapositiva y aproximadamente 6 palabras por línea. Evita saturar con párrafos largos.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="border border-slate-200 rounded-xl p-4 bg-orange-50/30 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-check text-orange-600"></i> Regla del 6x6
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Procura no colocar más de <strong>6 líneas de texto</strong> por diapositiva y un máximo aproximado de <strong>6 palabras por línea</strong>. Las diapositivas son un apoyo visual para el expositor, no fichas para leer todo el tema.
+                        </p>
                     </div>
-                    <div class="p-4 rounded-xl bg-blue-50/50 border border-blue-100">
-                        <h3 class="font-bold text-blue-900 mb-1">Regla de Contraste</h3>
-                        <p class="text-sm text-slate-600">Usa fondo claro con texto oscuro o fondo oscuro con texto blanco para asegurar visibilidad con proyector.</p>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-orange-50/30 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-palette text-orange-600"></i> Contraste y Tipografía
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Utiliza fondos claros con letras oscuras (o fondo muy oscuro con letras blancas). Evita combinar colores chillantes como texto amarillo sobre fondo blanco. El tamaño de letra sugerido para títulos es de 32 pt y cuerpo de 20 pt.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA: LIBROS Y GUÍAS -->
-        <section id="content-libros" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="bg-amber-100 text-amber-600 p-3 rounded-xl">
-                        <i class="fa-solid fa-book-bookmark text-2xl"></i>
+        <!-- 5. PESTAÑA: SEGURIDAD E INTERNET -->
+        <section id="tab-seguridad" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800">Guías de Estudio y Libros Recomendados</h2>
-                        <p class="text-sm text-slate-500">Recursos de consulta rápida y manuales para preparatoria</p>
+                        <h2 class="text-xl font-bold text-slate-900">Búsquedas Confiables y Seguridad en la Nube</h2>
+                        <p class="text-xs text-slate-500">Criterios para evaluar la información web y organizar tus archivos digitales.</p>
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50">
-                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Manual Escolar</span>
-                        <h3 class="font-bold text-slate-800 my-1">Guía Rápida Formato APA 7</h3>
-                        <p class="text-xs text-slate-600 mb-3">Estructura para trabajos, citas textuales y bibliografía formal.</p>
-                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-1 rounded">PDF Consultable</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass text-indigo-600"></i> Filtros en Google
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Utiliza comillas <code>"texto exacto"</code> para buscar una frase precisa, o el comando <code>filetype:pdf</code> al final de tu búsqueda para encontrar documentos académicos en PDF.
+                        </p>
                     </div>
-                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50">
-                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Excel de Cero a Cien</span>
-                        <h3 class="font-bold text-slate-800 my-1">Compendio de Fórmulas Prácticas</h3>
-                        <p class="text-xs text-slate-600 mb-3">Explicación concisa de =SUMA, =PROMEDIO, =SI, =CONTAR.SI y =BUSCARV.</p>
-                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-1 rounded">Manual Digital</span>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-cloud text-indigo-600"></i> Nube Escolar
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Guarda tus tareas en Google Drive o OneDrive organizadas por carpetas de cada materia. Evita tener todos los archivos sueltos en el escritorio de la computadora.
+                        </p>
                     </div>
-                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50">
-                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wide">Ciberseguridad</span>
-                        <h3 class="font-bold text-slate-800 my-1">Ciudadanía Digital Segura</h3>
-                        <p class="text-xs text-slate-600 mb-3">Protección de datos personales, autenticación de dos pasos y redes sociales.</p>
-                        <span class="text-xs bg-slate-200 text-slate-700 px-2 py-1 rounded">Guía Preventiva</span>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-lock text-indigo-600"></i> Cuidado con Correos Sospechosos
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Si recibes un correo pidiendo contraseñas o ofreciendo regalos extraños, revisa el remitente. Las instituciones escolares nunca te pedirán tu clave secreta por mensaje.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA: ATAJOS DE TECLADO -->
-        <section id="content-atajos" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
+        <!-- 6. PESTAÑA: LIBROS Y GUÍAS -->
+        <section id="tab-libros" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Guías de Estudio y Libros Recomendados</h2>
+                        <p class="text-xs text-slate-500">Material de referencia y documentos para profundizar en la materia.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 flex items-start gap-3">
+                        <div class="text-amber-600 text-2xl pt-1"><i class="fa-solid fa-file-pdf"></i></div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">Guía Básica de Informática para Bachillerato</h3>
+                            <p class="text-xs text-slate-500 mt-1">Sintesis con los conceptos teóricos del programa escolar: hardware, software, sistemas operativos y redes.</p>
+                            <span class="inline-block mt-2 text-xs font-semibold text-blue-700">Consulta en Biblioteca Escolar</span>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 flex items-start gap-3">
+                        <div class="text-amber-600 text-2xl pt-1"><i class="fa-solid fa-book"></i></div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">Manual de Usuario de la Suite de Oficina</h3>
+                            <p class="text-xs text-slate-500 mt-1">Manual de referencia con todas las herramientas de la barra de cinta de Word y Excel explicadas con ejemplos.</p>
+                            <span class="inline-block mt-2 text-xs font-semibold text-blue-700">Material de Apoyo Digital</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. PESTAÑA: ATAJOS DE TECLADO -->
+        <section id="tab-atajos" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 flex-wrap gap-3">
                     <div class="flex items-center gap-3">
-                        <div class="bg-purple-100 text-purple-600 p-3 rounded-xl">
-                            <i class="fa-solid fa-keyboard text-2xl"></i>
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-keyboard"></i>
                         </div>
                         <div>
-                            <h2 class="text-xl font-bold text-slate-800">Atajos de Teclado Universales</h2>
-                            <p class="text-sm text-slate-500">Agiliza tu trabajo en Windows y la suite de Office</p>
+                            <h2 class="text-xl font-bold text-slate-900">Buscador de Atajos de Teclado</h2>
+                            <p class="text-xs text-slate-500">Gana agilidad al trabajar en la computadora utilizando el teclado.</p>
                         </div>
                     </div>
-                    <input type="text" id="shortcut-search" oninput="filtrarAtajos()" placeholder="Buscar atajo (ej. Copiar, Guardar)..." class="p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 w-full sm:w-64">
+
+                    <!-- Buscador -->
+                    <div class="w-full sm:w-64">
+                        <input type="text" id="shortcut-search" onkeyup="filtrarAtajos()" placeholder="Buscar atajo (ej. Copiar, Guardar)..." class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
                 </div>
 
+                <!-- Tabla de Atajos -->
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
+                    <table class="w-full text-left text-xs border-collapse">
                         <thead>
-                            <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                            <tr class="bg-slate-100 text-slate-700 uppercase font-semibold">
                                 <th class="p-3 rounded-l-lg">Atajo</th>
-                                <th class="p-3">Función</th>
+                                <th class="p-3">Acción</th>
                                 <th class="p-3 rounded-r-lg">Programa</th>
                             </tr>
                         </thead>
-                        <tbody id="shortcuts-table-body" class="text-sm divide-y divide-slate-100">
-                            <!-- Inserción dinámica de atajos -->
+                        <tbody id="shortcut-tbody" class="divide-y divide-slate-100 text-slate-600">
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + C</td><td class="p-3">Copiar texto o elemento seleccionado</td><td class="p-3"><span class="bg-slate-100 px-2 py-0.5 rounded text-slate-600">General</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + V</td><td class="p-3">Pegar contenido del portapapeles</td><td class="p-3"><span class="bg-slate-100 px-2 py-0.5 rounded text-slate-600">General</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + X</td><td class="p-3">Cortar elemento seleccionado</td><td class="p-3"><span class="bg-slate-100 px-2 py-0.5 rounded text-slate-600">General</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + Z</td><td class="p-3">Deshacer última acción realizada</td><td class="p-3"><span class="bg-slate-100 px-2 py-0.5 rounded text-slate-600">General</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + G</td><td class="p-3">Guardar el documento actual</td><td class="p-3"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-semibold">Word / Excel</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + J</td><td class="p-3">Justificar el texto formateado</td><td class="p-3"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-semibold">Word</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">F5</td><td class="p-3">Iniciar presentación con diapositivas desde el principio</td><td class="p-3"><span class="bg-orange-50 text-orange-700 px-2 py-0.5 rounded font-semibold">PowerPoint</span></td></tr>
+                            <tr><td class="p-3 font-mono font-bold text-slate-900">Ctrl + T</td><td class="p-3">Abrir una nueva pestaña en el navegador web</td><td class="p-3"><span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-semibold">Navegadores</span></td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA: DESAFÍO DE ATAJOS (MINIJUÉGO) -->
-        <section id="content-juego" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto">
-                <div class="text-center mb-6">
-                    <div class="inline-flex bg-pink-100 text-pink-600 p-4 rounded-2xl mb-2">
-                        <i class="fa-solid fa-gamepad text-3xl"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-slate-800">Desafío de Velocidad: Atajos</h2>
-                    <p class="text-sm text-slate-500">Responde correctamente antes de que el tiempo se agote</p>
-                </div>
-
-                <div id="game-card" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 transition-all">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold text-slate-500" id="game-progress">Pregunta 1 de 5</span>
-                        <span class="text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full" id="game-timer"><i class="fa-regular fa-clock mr-1"></i>10s</span>
-                    </div>
-
-                    <h3 class="text-lg font-bold text-slate-800 mb-4" id="game-question">¿Cuál es el atajo para copiar texto seleccionado?</h3>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4" id="game-options">
-                        <!-- Opciones de juego dinámicas -->
-                    </div>
-
-                    <div id="game-feedback" class="min-h-[2.5rem] flex items-center justify-center text-sm font-bold text-center"></div>
-                </div>
-
-                <div class="mt-4 text-center">
-                    <button onclick="iniciarMinijuego()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-medium text-sm rounded-xl shadow-sm transition-all">
-                        <i class="fa-solid fa-rotate-right mr-2"></i>Reiniciar Juego
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- PESTAÑA: QUIZ EVALUATIVO -->
-        <section id="content-quiz" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="bg-cyan-100 text-cyan-600 p-3 rounded-xl">
-                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">Examen Diagnóstico de Computación</h2>
-                        <p class="text-sm text-slate-500">Ponte a prueba con 10 preguntas fundamentales de opción múltiple</p>
-                    </div>
-                </div>
-
-                <form id="quiz-form" onsubmit="evaluarQuiz(event)" class="space-y-6">
-                    <div id="quiz-container" class="space-y-6">
-                        <!-- Preguntas cargadas dinámicamente -->
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-                        <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-sm transition-all">
-                            Enviar y Calificar Examen
-                        </button>
-                        <div id="quiz-result" class="text-base font-bold text-slate-800"></div>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <!-- PESTAÑA: ASISTENTE IA AUTÓNOMO -->
-        <section id="content-ia" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100 flex-wrap">
+        <!-- 8. PESTAÑA: MINIJUEGO INTERACTIVO -->
+        <section id="tab-juego" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 flex-wrap gap-3">
                     <div class="flex items-center gap-3">
-                        <div class="bg-indigo-600 text-white p-3 rounded-xl shadow-sm">
-                            <i class="fa-solid fa-robot text-2xl"></i>
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-gamepad"></i>
                         </div>
                         <div>
-                            <h2 class="text-xl font-bold text-slate-800">Tutor e Inteligencia Artificial Educativa</h2>
-                            <p class="text-sm text-slate-500">Responde cualquier duda sobre Informática, Programación, Word, Excel, Redes y Tecnología sin límites</p>
+                            <h2 class="text-xl font-bold text-slate-900">Desafío de Atajos: "Atrapa la Tecla"</h2>
+                            <p class="text-xs text-slate-500">Demuestra tu velocidad seleccionando la combinación correcta de teclas.</p>
                         </div>
                     </div>
-                    <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        Gemini 3 Flash Activo
-                    </span>
-                </div>
 
-                <!-- Sugerencias de consulta rápida -->
-                <div class="mb-4">
-                    <p class="text-xs font-semibold text-slate-500 mb-2">Ejemplos de preguntas avanzadas:</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="usarSugerencia('Explícame con ejemplos la diferencia entre RAM, ROM y Disco Duro')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            💾 RAM vs ROM vs Disco Duro
-                        </button>
-                        <button onclick="usarSugerencia('Dame un ejemplo completo paso a paso de la función =BUSCARV en Excel con una tabla ficticia')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            📊 Función =BUSCARV en Excel
-                        </button>
-                        <button onclick="usarSugerencia('¿Qué es un algoritmo y cómo se representa en un diagrama de flujo con un ejemplo?')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            📐 Algoritmos y Diagramas
-                        </button>
-                        <button onclick="usarSugerencia('Escribe un programa sencillo en Python que pida dos números y muestre su suma')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            🐍 Código en Python
-                        </button>
-                        <button onclick="usarSugerencia('Explícame de manera sencilla cómo funciona la ciberseguridad y Phishing')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            🛡️ Phishing y Seguridad
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Ventana del Chat -->
-                <div id="ai-chat-history" class="h-96 overflow-y-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-4 mb-4">
-                    <div class="flex gap-3 items-start">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold">
-                            <i class="fa-solid fa-graduation-cap text-xs"></i>
+                    <div class="flex items-center gap-4 text-xs font-bold">
+                        <div class="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+                            Puntuación: <span id="game-score" class="text-purple-700 font-extrabold">0</span> pts
                         </div>
-                        <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm max-w-[85%] text-slate-700 leading-relaxed text-sm">
-                            ¡Hola! Ahora cuento con el modelo <b>Gemini 3 Flash</b> integrado. Puedes hacerme cualquier pregunta abierta sobre informática, pedirme explicaciones detalladas, ejemplos prácticos, fórmulas avanzadas de Excel o código de programación.
+                        <div class="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+                            Tiempo: <span id="game-timer" class="text-red-600 font-extrabold">10</span>s
                         </div>
                     </div>
                 </div>
 
-                <!-- Campo de Entrada -->
-                <form onsubmit="enviarPreguntaIA(event)" class="flex gap-2">
-                    <input type="text" id="ai-input" placeholder="Pregunta lo que quieras sin límites (ej. Explícame cómo funciona una red Wi-Fi)..." class="flex-grow p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <button type="submit" id="ai-send-btn" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-sm transition-all flex items-center gap-2 text-sm shrink-0">
-                        <span>Preguntar</span>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
+                <!-- Área de Juego -->
+                <div id="game-container" class="border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center space-y-6 bg-slate-50 transition-all">
+                    <!-- Pantalla Inicial -->
+                    <div id="game-start-screen" class="space-y-4 py-6">
+                        <div class="w-16 h-16 bg-purple-100 text-purple-700 rounded-full flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">¿Qué tan rápido identificas los atajos de teclado?</h3>
+                        <p class="text-xs text-slate-500 max-w-md mx-auto">Tendrás 10 segundos por pregunta. Si eliges mal, la caja temblará y te mostrará en rojo tu error y en verde la opción correcta.</p>
+                        <button onclick="iniciarJuego()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs px-6 py-3 rounded-xl transition shadow-md">
+                            ¡Comenzar Desafío!
+                        </button>
+                    </div>
+
+                    <!-- Pantalla de Pregunta -->
+                    <div id="game-play-screen" class="hidden space-y-5">
+                        <span id="game-question-num" class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full">Pregunta 1 de 5</span>
+                        <h3 id="game-target-action" class="text-lg sm:text-xl font-extrabold text-slate-900">¿Cuál es el atajo para copiar texto?</h3>
+                        
+                        <!-- Retroalimentación de Error/Acierto -->
+                        <div id="game-feedback" class="hidden text-xs font-bold py-2 px-3 rounded-lg max-w-md mx-auto transition"></div>
+
+                        <!-- Opciones de Respuesta -->
+                        <div id="game-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
+                            <!-- Se generan con JS -->
+                        </div>
+                    </div>
+
+                    <!-- Pantalla Fin de Juego -->
+                    <div id="game-end-screen" class="hidden space-y-4 py-6">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">¡Reto Completado!</h3>
+                        <p class="text-xs text-slate-600">Puntuación total obtenida: <span id="final-game-score" class="font-bold text-purple-700 text-sm">0</span> puntos.</p>
+                        <button onclick="iniciarJuego()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs px-6 py-3 rounded-xl transition shadow-md">
+                            Volver a Intentar
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- PESTAÑA: CÓDIGO QR -->
-        <section id="content-qr" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center max-w-lg mx-auto">
-                <div class="inline-flex bg-rose-100 text-rose-600 p-4 rounded-2xl mb-3">
-                    <i class="fa-solid fa-qrcode text-3xl"></i>
+        <!-- 9. PESTAÑA: QUIZ DE EVALUACIÓN -->
+        <section id="tab-quiz" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-check-double"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Cuestionario de Autoevaluación</h2>
+                        <p class="text-xs text-slate-500">Pone a prueba tus conocimientos antes de los exámenes parciales.</p>
+                    </div>
                 </div>
-                <h2 class="text-xl font-bold text-slate-800 mb-1">Código QR del Sitio Web</h2>
-                <p class="text-sm text-slate-500 mb-6">Escanea este código con la cámara de tu teléfono móvil para acceder directamente a la plataforma.</p>
 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 inline-block mb-4">
-                    <div id="qrcode-container" class="flex justify-center items-center min-h-[200px]"></div>
+                <div id="quiz-container" class="space-y-6">
+                    <!-- Preguntas estructuradas -->
+                    <div class="space-y-4">
+                        <!-- Pregunta 1 -->
+                        <div class="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-2">
+                            <p class="font-bold text-xs text-slate-800">1. ¿Qué combinación de teclas se utiliza para justificar un párrafo en Microsoft Word?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">a) Ctrl + E</button>
+                                <button onclick="evaluarQuiz(this, true)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">b) Ctrl + J</button>
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">c) Ctrl + N</button>
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">d) Alt + F4</button>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 2 -->
+                        <div class="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-2">
+                            <p class="font-bold text-xs text-slate-800">2. En Excel, ¿qué signo debe escribirse obligatoriamente al inicio de toda fórmula o función?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">a) El signo de gato (#)</button>
+                                <button onclick="evaluarQuiz(this, true)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">b) El signo de igual (=)</button>
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">c) El signo de dinero ($)</button>
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">d) El signo de suma (+)</button>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 3 -->
+                        <div class="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-2">
+                            <p class="font-bold text-xs text-slate-800">3. ¿En qué consiste la regla del 6x6 para diseñar presentaciones en PowerPoint?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">a) Usar máximo 6 diapositivas de 6 colores distintos</button>
+                                <button onclick="evaluarQuiz(this, true)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">b) Máximo 6 líneas por diapositiva y aprox. 6 palabras por línea</button>
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">c) Exponer en un tiempo exacto de 6 minutos con 6 segundos</button>
+                                <button onclick="evaluarQuiz(this, false)" class="p-2 bg-white border rounded-lg text-left hover:bg-slate-100">d) Insertar 6 imágenes por cada 6 párrafos impresos</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <p id="qr-url-text" class="text-xs font-mono text-slate-500 break-all bg-slate-100 p-2 rounded-lg"></p>
             </div>
         </section>
 
     </main>
 
-    <!-- Pie de página -->
-    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="font-medium">CompuPrep 181 - Material Educativo para Bachillerato General</p>
-            <p class="mt-1 text-slate-500">Diseñado para aprendizaje autónomo de informática y herramientas digitales.</p>
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <p class="font-bold text-slate-200">Materia de Computación I • Preparatoria No. 181</p>
+                <p class="text-slate-500 mt-0.5">Recursos de estudio para el ciclo escolar 2026.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="switchTab('inicio')" class="hover:text-white transition">Inicio</button>
+                <button onclick="toggleQRModal()" class="hover:text-white transition">Generar QR Escolar</button>
+            </div>
         </div>
     </footer>
 
-    <!-- LÓGICA EN JAVASCRIPT -->
+    <!-- MODAL DE CÓDIGO QR -->
+    <div id="qr-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl relative">
+            <button onclick="toggleQRModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Escanea para abrir en celular</h3>
+            <p class="text-xs text-slate-500">Apunta con la cámara de tu teléfono móvil para acceder directamente a la página web sin escribir el enlace.</p>
+            
+            <!-- Contenedor del QR generado dinámicamente -->
+            <div id="qrcode-target" class="flex justify-center p-3 bg-white border border-slate-200 rounded-xl"></div>
+
+            <p class="text-[11px] font-mono text-slate-400 break-all">https://danigomezruiz1205-web.github.io/aprendecompuc181/</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT PRINCIPAL DE LÓGICA E INTERACCIÓN -->
     <script>
-        // 1. Navegación por Pestañas
-        function changeTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-                content.classList.remove('block');
+        // 1. Cambio de pestañas
+        function switchTab(tabId) {
+            // Ocultar todas las secciones
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Quitar clase activa a los botones del menú
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
             });
 
-            const selectedBtn = document.getElementById(`tab-${tabName}`);
-            const selectedContent = document.getElementById(`content-${tabName}`);
-
-            if (selectedBtn && selectedContent) {
-                selectedBtn.classList.add('active');
-                selectedContent.classList.remove('hidden');
-                selectedContent.classList.add('block');
+            // Mostrar la pestaña seleccionada
+            const targetContent = document.getElementById('tab-' + tabId);
+            if (targetContent) {
+                targetContent.classList.add('active');
             }
 
-            if (tabName === 'qr') {
-                generarCodigoQR();
+            // Activar botón del menú
+            const targetBtn = document.getElementById('nav-' + tabId);
+            if (targetBtn) {
+                targetBtn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
             }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 2. Generador Dinámico de Código QR
-        let qrInstancia = null;
-        function generarCodigoQR() {
-            const container = document.getElementById('qrcode-container');
-            const urlText = document.getElementById('qr-url-text');
-            const targetURL = window.location.href.includes('github.io') 
-                ? window.location.href 
-                : 'https://danigomezruiz1205-web.github.io/aprendecompuc181/';
+        // 2. Simulador numérico de Excel
+        function calcularSimuladorExcel() {
+            const p1 = parseFloat(document.getElementById('calc-p1').value) || 0;
+            const p2 = parseFloat(document.getElementById('calc-p2').value) || 0;
+            const p3 = parseFloat(document.getElementById('calc-p3').value) || 0;
 
-            if (urlText) urlText.textContent = targetURL;
+            const promedio = ((p1 + p2 + p3) / 3).toFixed(1);
+            document.getElementById('res-promedio').innerText = promedio;
 
-            if (container) {
-                container.innerHTML = '';
-                qrInstancia = new QRCode(container, {
-                    text: targetURL,
-                    width: 200,
-                    height: 200,
-                    colorDark: "#0f172a",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            }
-        }
-
-        // 3. Simulador de Excel
-        function calcularPromedio() {
-            const p1 = parseFloat(document.getElementById('calif1').value) || 0;
-            const p2 = parseFloat(document.getElementById('calif2').value) || 0;
-            const p3 = parseFloat(document.getElementById('calif3').value) || 0;
-
-            const promedio = (p1 + p2 + p3) / 3;
-            document.getElementById('res-promedio').textContent = promedio.toFixed(2);
-
-            const estatus = document.getElementById('res-estatus');
+            const estatusElem = document.getElementById('res-estatus');
             if (promedio >= 6.0) {
-                estatus.textContent = "APROBADO";
-                estatus.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700";
+                estatusElem.innerText = "Aprobado";
+                estatusElem.className = "px-2 py-0.5 rounded text-xs font-bold bg-emerald-900 text-emerald-300";
             } else {
-                estatus.textContent = "REPROBADO";
-                estatus.className = "px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700";
+                estatusElem.innerText = "Reprobado";
+                estatusElem.className = "px-2 py-0.5 rounded text-xs font-bold bg-red-900 text-red-300";
             }
         }
 
-        // 4. Atajos de Teclado con Búsqueda
-        const listaAtajos = [
-            { tecla: 'Ctrl + C', funcion: 'Copiar el texto o elemento seleccionado', programa: 'Universal' },
-            { tecla: 'Ctrl + V', funcion: 'Pegar el contenido del portapapeles', programa: 'Universal' },
-            { tecla: 'Ctrl + X', funcion: 'Cortar el elemento seleccionado', programa: 'Universal' },
-            { tecla: 'Ctrl + Z', funcion: 'Deshacer la última acción realizada', programa: 'Universal' },
-            { tecla: 'Ctrl + G / Ctrl + S', funcion: 'Guardar el archivo o documento actual', programa: 'Word / Excel / PPT' },
-            { tecla: 'Ctrl + E', funcion: 'Seleccionar todo el texto o contenido', programa: 'Word / Windows' },
-            { tecla: 'Ctrl + J', funcion: 'Justificar alineación de párrafo', programa: 'Microsoft Word' },
-            { tecla: 'Ctrl + N', funcion: 'Aplicar formato de Negrita', programa: 'Word / Excel' },
-            { tecla: 'Ctrl + K', funcion: 'Aplicar formato de Cursiva', programa: 'Word / Excel' },
-            { tecla: 'F5', funcion: 'Iniciar la presentación desde el principio', programa: 'PowerPoint' },
-            { tecla: 'Alt + Tab', funcion: 'Cambiar rápidamente entre aplicaciones abiertas', programa: 'Windows' },
-            { tecla: 'Tecla Windows + D', funcion: 'Mostrar o ocultar el escritorio inmediatamente', programa: 'Windows' }
-        ];
-
-        function renderizarAtajos(items) {
-            const tbody = document.getElementById('shortcuts-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            items.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/80 transition-colors';
-                tr.innerHTML = `
-                    <td class="p-3"><kbd class="px-2 py-1 bg-slate-200 border border-slate-300 rounded text-xs font-mono font-semibold text-slate-800">${item.tecla}</kbd></td>
-                    <td class="p-3 text-slate-700">${item.funcion}</td>
-                    <td class="p-3"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded font-medium">${item.programa}</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
+        // 3. Filtrar atajos de teclado
         function filtrarAtajos() {
             const query = document.getElementById('shortcut-search').value.toLowerCase();
-            const filtrados = listaAtajos.filter(a => 
-                a.tecla.toLowerCase().includes(query) || 
-                a.funcion.toLowerCase().includes(query) || 
-                a.programa.toLowerCase().includes(query)
-            );
-            renderizarAtajos(filtrados);
+            const rows = document.querySelectorAll('#shortcut-tbody tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         }
 
-        // 5. Minijuego de Atajos con Detección de Errores
+        // 4. Modal y Generador Dinámico de Código QR
+        let qrGenerated = false;
+        function toggleQRModal() {
+            const modal = document.getElementById('qr-modal');
+            modal.classList.toggle('hidden');
+
+            if (!qrGenerated && !modal.classList.contains('hidden')) {
+                const url = "https://danigomezruiz1205-web.github.io/aprendecompuc181/";
+                new QRCode(document.getElementById("qrcode-target"), {
+                    text: url,
+                    width: 160,
+                    height: 160,
+                    colorDark : "#0f172a",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+                qrGenerated = true;
+            }
+        }
+
+        // 5. Minijuego con detección visual de errores
         const preguntasJuego = [
-            { q: '¿Qué atajo de teclado te permite deshacer una equivocación?', opts: ['Ctrl + Z', 'Ctrl + Y', 'Ctrl + X', 'Ctrl + D'], correct: 0 },
-            { q: '¿Qué tecla presionas para iniciar una presentación en PowerPoint?', opts: ['F1', 'F5', 'F11', 'Ctrl + P'], correct: 1 },
-            { q: '¿Cuál es el atajo para guardar un archivo en Office en español?', opts: ['Ctrl + G', 'Ctrl + S', 'Ctrl + P', 'Ctrl + A'], correct: 0 },
-            { q: '¿Cómo seleccionas todo el contenido de un documento en Word?', opts: ['Ctrl + A', 'Ctrl + E', 'Ctrl + T', 'Ctrl + S'], correct: 1 },
-            { q: '¿Cuál es la combinación para cortar un texto seleccionado?', opts: ['Ctrl + C', 'Ctrl + V', 'Ctrl + X', 'Ctrl + Z'], correct: 2 }
+            { accion: "Copiar texto o elemento", correcta: "Ctrl + C", opciones: ["Ctrl + C", "Ctrl + V", "Ctrl + X", "Ctrl + Z"] },
+            { accion: "Pegar contenido del portapapeles", correcta: "Ctrl + V", opciones: ["Ctrl + C", "Ctrl + V", "Ctrl + P", "Ctrl + G"] },
+            { accion: "Deshacer la última acción", correcta: "Ctrl + Z", opciones: ["Ctrl + Y", "Ctrl + Z", "Ctrl + D", "Alt + F4"] },
+            { accion: "Guardar documento actual", correcta: "Ctrl + G", opciones: ["Ctrl + S", "Ctrl + G", "Ctrl + A", "Ctrl + P"] },
+            { accion: "Justificar texto en Word", correcta: "Ctrl + J", opciones: ["Ctrl + T", "Ctrl + E", "Ctrl + J", "Ctrl + D"] }
         ];
 
-        let indexJuego = 0;
-        let timerJuego = null;
+        let juegoIndice = 0;
+        let juegoPuntos = 0;
+        let juegoTimer = null;
         let tiempoRestante = 10;
-        let juegoBloqueado = false;
 
-        function iniciarMinijuego() {
-            indexJuego = 0;
-            juegoBloqueado = false;
-            cargarPreguntaJuego();
+        function iniciarJuego() {
+            juegoIndice = 0;
+            juegoPuntos = 0;
+            document.getElementById('game-score').innerText = "0";
+            document.getElementById('game-start-screen').classList.add('hidden');
+            document.getElementById('game-end-screen').classList.add('hidden');
+            document.getElementById('game-play-screen').classList.remove('hidden');
+            mostrarPreguntaJuego();
         }
 
-        function cargarPreguntaJuego() {
-            clearInterval(timerJuego);
-            juegoBloqueado = false;
-            tiempoRestante = 10;
-
-            if (indexJuego >= preguntasJuego.length) {
-                document.getElementById('game-card').innerHTML = `
-                    <div class="text-center py-6">
-                        <i class="fa-solid fa-trophy text-4xl text-amber-500 mb-2"></i>
-                        <h3 class="text-xl font-bold text-slate-800">¡Desafío Completado!</h3>
-                        <p class="text-sm text-slate-600 my-2">Has dominado los atajos esenciales de computación.</p>
-                        <button onclick="iniciarMinijuego()" class="mt-4 px-5 py-2.5 bg-blue-600 text-white font-bold text-sm rounded-xl hover:bg-blue-700">Jugar de Nuevo</button>
-                    </div>
-                `;
+        function mostrarPreguntaJuego() {
+            if (juegoIndice >= preguntasJuego.length) {
+                finalizarJuego();
                 return;
             }
 
-            const p = preguntasJuego[indexJuego];
-            document.getElementById('game-progress').textContent = `Pregunta ${indexJuego + 1} de ${preguntasJuego.length}`;
-            document.getElementById('game-question').textContent = p.q;
-            document.getElementById('game-timer').innerHTML = `<i class="fa-regular fa-clock mr-1"></i>${tiempoRestante}s`;
-            document.getElementById('game-feedback').textContent = '';
+            const q = preguntasJuego[juegoIndice];
+            document.getElementById('game-question-num').innerText = `Pregunta ${juegoIndice + 1} de ${preguntasJuego.length}`;
+            document.getElementById('game-target-action').innerText = `¿Cuál es el atajo para: "${q.accion}"?`;
 
-            const optsContainer = document.getElementById('game-options');
-            optsContainer.innerHTML = '';
+            // Resetear retroalimentación
+            const feedback = document.getElementById('game-feedback');
+            feedback.classList.add('hidden');
+            feedback.className = "hidden text-xs font-bold py-2 px-3 rounded-lg max-w-md mx-auto transition";
 
-            p.opts.forEach((opt, idx) => {
+            // Opciones
+            const container = document.getElementById('game-options');
+            container.innerHTML = '';
+
+            q.opciones.forEach(opt => {
                 const btn = document.createElement('button');
-                btn.className = 'opt-btn p-3 bg-white border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 hover:border-blue-500 hover:bg-blue-50/50 transition-all text-left';
-                btn.textContent = opt;
-                btn.onclick = () => responderJuego(idx, btn);
-                optsContainer.appendChild(btn);
+                btn.className = "p-3 bg-white border border-slate-200 rounded-xl font-mono text-sm font-bold text-slate-800 hover:border-purple-300 hover:bg-purple-50/50 transition outline-none";
+                btn.innerText = opt;
+                btn.onclick = () => verificarRespuestaJuego(opt, q.correcta, btn);
+                container.appendChild(btn);
             });
 
-            timerJuego = setInterval(() => {
+            // Reiniciar Reloj
+            clearInterval(juegoTimer);
+            tiempoRestante = 10;
+            document.getElementById('game-timer').innerText = tiempoRestante;
+
+            juegoTimer = setInterval(() => {
                 tiempoRestante--;
-                document.getElementById('game-timer').innerHTML = `<i class="fa-regular fa-clock mr-1"></i>${tiempoRestante}s`;
+                document.getElementById('game-timer').innerText = tiempoRestante;
                 if (tiempoRestante <= 0) {
-                    clearInterval(timerJuego);
-                    manejarTiempoAgotado();
+                    clearInterval(juegoTimer);
+                    marcarErrorTiempo(q.correcta);
                 }
             }, 1000);
         }
 
-        function responderJuego(indexSeleccionado, btnElement) {
-            if (juegoBloqueado) return;
-            juegoBloqueado = true;
-            clearInterval(timerJuego);
-
-            const p = preguntasJuego[indexJuego];
+        function verificarRespuestaJuego(seleccion, correcta, botonPresionado) {
+            clearInterval(juegoTimer);
+            const container = document.getElementById('game-container');
             const feedback = document.getElementById('game-feedback');
-            const gameCard = document.getElementById('game-card');
+            const botones = document.querySelectorAll('#game-options button');
 
-            if (indexSeleccionado === p.correct) {
-                btnElement.classList.remove('bg-white', 'border-slate-300');
-                btnElement.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600');
-                feedback.innerHTML = `<span class="text-emerald-600"><i class="fa-solid fa-circle-check mr-1"></i>¡Correcto! Excelente reflejo.</span>`;
-            } else {
-                gameCard.classList.add('animate-shake');
-                btnElement.classList.remove('bg-white', 'border-slate-300');
-                btnElement.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+            // Deshabilitar botones para evitar múltiples clics
+            botones.forEach(b => b.disabled = true);
 
-                const btns = document.querySelectorAll('.opt-btn');
-                if (btns[p.correct]) {
-                    btns[p.correct].classList.remove('bg-white', 'border-slate-300');
-                    btns[p.correct].classList.add('bg-emerald-100', 'text-emerald-800', 'border-emerald-400');
-                }
-
-                feedback.innerHTML = `<span class="text-rose-600"><i class="fa-solid fa-circle-xmark mr-1"></i>Incorrecto. La respuesta correcta era: <b>${p.opts[p.correct]}</b></span>`;
-
-                setTimeout(() => gameCard.classList.remove('animate-shake'), 400);
-            }
-
-            setTimeout(() => {
-                indexJuego++;
-                cargarPreguntaJuego();
-            }, 1600);
-        }
-
-        function manejarTiempoAgotado() {
-            if (juegoBloqueado) return;
-            juegoBloqueado = true;
-
-            const p = preguntasJuego[indexJuego];
-            const feedback = document.getElementById('game-feedback');
-            const btns = document.querySelectorAll('.opt-btn');
-
-            if (btns[p.correct]) {
-                btns[p.correct].classList.add('bg-emerald-100', 'text-emerald-800', 'border-emerald-400');
-            }
-
-            feedback.innerHTML = `<span class="text-rose-600"><i class="fa-solid fa-hourglass-end mr-1"></i>¡Tiempo agotado! La opción correcta era: <b>${p.opts[p.correct]}</b></span>`;
-
-            setTimeout(() => {
-                indexJuego++;
-                cargarPreguntaJuego();
-            }, 1600);
-        }
-
-        // 6. Quiz Evaluativo Estructurado
-        const quizPreguntas = [
-            { q: '1. ¿Cuál es el formato estándar recomendado para márgenes en un trabajo con formato APA?', opts: ['1 cm por lado', '2.54 cm por lado', '3.5 cm superior e inferior', 'Sin márgenes'], correct: 1 },
-            { q: '2. En Microsoft Excel, ¿cuál es el símbolo obligatorio para iniciar cualquier fórmula?', opts: ['#', '=', '$', '&'], correct: 1 },
-            { q: '3. ¿Qué establece la Regla del 6x6 en PowerPoint?', opts: ['6 diapositivas por minuto', 'Máximo 6 líneas por diapositiva y 6 palabras por línea', 'Usar solo 6 colores', 'Presentar en 6 minutos'], correct: 1 },
-            { q: '4. ¿Qué atajo de teclado permite deshacer una acción en Windows?', opts: ['Ctrl + X', 'Ctrl + C', 'Ctrl + Z', 'Ctrl + V'], correct: 2 },
-            { q: '5. ¿Cuál es la función principal del Procesador de Textos?', opts: ['Calcular presupuestos', 'Crear y editar documentos de texto', 'Diseñar bases de datos', 'Editar video'], correct: 1 },
-            { q: '6. ¿Qué función de Excel evalúa una condición lógica y entrega un resultado verdadero o falso?', opts: ['=SUMA', '=PROMEDIO', '=SI', '=MAX'], correct: 2 },
-            { q: '7. Para actualizar automáticamente la tabla de contenido en Word debemos usar:', opts: ['Estilos de Título (Título 1, Título 2)', 'Negrita manual', 'Subrayado simple', 'Cambio de fuente'], correct: 0 },
-            { q: '8. ¿Cuál es una buena práctica de seguridad digital en contraseñas?', opts: ['Usar "123456"', 'Compartirla con amigos', 'Combinar letras, números y símbolos', 'Usar tu fecha de nacimiento'], correct: 2 },
-            { q: '9. ¿Qué tecla se utiliza para iniciar una presentación a pantalla completa en PowerPoint?', opts: ['F1', 'F5', 'Esc', 'Enter'], correct: 1 },
-            { q: '10. ¿Qué servicio permite almacenar archivos en Internet de forma remota?', opts: ['Procesador local', 'Almacenamiento en la Nube', 'Disco flexible', 'Memoria ROM'], correct: 1 }
-        ];
-
-        function cargarQuiz() {
-            const container = document.getElementById('quiz-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            quizPreguntas.forEach((item, qIndex) => {
-                const qDiv = document.createElement('div');
-                qDiv.className = 'p-4 bg-slate-50 border border-slate-200 rounded-xl';
+            if (seleccion === correcta) {
+                botonPresionado.classList.add('btn-correct');
+                juegoPuntos += 20;
+                document.getElementById('game-score').innerText = juegoPuntos;
                 
-                let optsHTML = '';
-                item.opts.forEach((opt, oIndex) => {
-                    optsHTML += `
-                        <label class="flex items-center gap-2 p-2 rounded-lg hover:bg-white border border-transparent hover:border-slate-200 cursor-pointer text-sm text-slate-700">
-                            <input type="radio" name="quiz-q-${qIndex}" value="${oIndex}" class="text-blue-600 focus:ring-blue-500">
-                            <span>${opt}</span>
-                        </label>
-                    `;
-                });
+                feedback.innerText = "¡Correcto! +20 Puntos";
+                feedback.classList.remove('hidden');
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
 
-                qDiv.innerHTML = `
-                    <p class="font-semibold text-slate-800 text-sm mb-3">${item.q}</p>
-                    <div class="space-y-1">${optsHTML}</div>
-                `;
-                container.appendChild(qDiv);
-            });
-        }
-
-        function evaluarQuiz(e) {
-            e.preventDefault();
-            let aciertos = 0;
-
-            quizPreguntas.forEach((item, qIndex) => {
-                const selected = document.querySelector(`input[name="quiz-q-${qIndex}"]:checked`);
-                if (selected && parseInt(selected.value) === item.correct) {
-                    aciertos++;
-                }
-            });
-
-            const calificacion = ((aciertos / quizPreguntas.length) * 10).toFixed(1);
-            const resDiv = document.getElementById('quiz-result');
-
-            if (calificacion >= 6.0) {
-                resDiv.innerHTML = `<span class="text-emerald-600"><i class="fa-solid fa-circle-check mr-1"></i>Puntaje: ${calificacion} / 10 (${aciertos} aciertos) - ¡Aprobado!</span>`;
+                setTimeout(() => {
+                    juegoIndice++;
+                    mostrarPreguntaJuego();
+                }, 1200);
             } else {
-                resDiv.innerHTML = `<span class="text-rose-600"><i class="fa-solid fa-circle-xmark mr-1"></i>Puntaje: ${calificacion} / 10 (${aciertos} aciertos) - Repasa los temas e intenta de nuevo.</span>`;
-            }
-        }
+                // EFECTO DE ERROR VISUAL
+                botonPresionado.classList.add('btn-wrong');
+                container.classList.add('animate-shake');
 
-        // 7. Base de Conocimiento Local Integrada (Soporte Offline Completo de IA)
-        const baseConocimiento = [
-            {
-                claves: ['indice', 'índice', 'tabla de contenido', 'word'],
-                respuesta: "<b>Crear un índice automático en Microsoft Word:</b><br>1. Selecciona los títulos de tu documento.<br>2. En la pestaña <b>Inicio</b>, asigna <i>Título 1</i> para temas principales y <i>Título 2</i> para subtemas.<br>3. Ve a la pestaña <b>Referencias</b> &gt; <b>Tabla de contenido</b> &gt; elige un estilo automático.<br>4. Si modificas el documento, haz clic secundario sobre la tabla y presiona <i>'Actualizar campo'</i>."
-            },
-            {
-                claves: ['si', '=si', 'funcion si', 'función si', 'condicional', 'excel'],
-                respuesta: "<b>La función =SI en Microsoft Excel:</b><br>Evalúa si una condición se cumple (VERDADERO) o no (FALSO).<br><br><b>Sintaxis oficial:</b><br><code>=SI(prueba_logica, valor_si_verdadero, valor_si_falso)</code><br><br><b>Ejemplo escolar:</b><br><code>=SI(A1&gt;=6, \"Aprobado\", \"Reprobado\")</code><br>Devuelve 'Aprobado' si la nota es igual o mayor a 6."
-            },
-            {
-                claves: ['6x6', 'regla 6x6', 'powerpoint', 'diapositiva', 'presentacion'],
-                respuesta: "<b>La Regla del 6x6 en PowerPoint:</b><br>Es una guía para evitar diapositivas sobrecargadas:<br>• Usar máximo <b>6 líneas de texto</b> por diapositiva.<br>• Usar un promedio de <b>6 palabras por línea</b>.<br><i>Tip:</i> La diapositiva debe ser una guía visual complementaria, no un guion para leer completo."
-            },
-            {
-                claves: ['ip', 'direccion ip', 'redes', 'internet'],
-                respuesta: "<b>Dirección IP (Internet Protocol):</b><br>Es la etiqueta numérica única que identifica a un dispositivo (computadora, teléfono, impresora) conectado a una red local o a Internet. Permite el envío y recepción de paquetes de datos entre equipos."
-            },
-            {
-                claves: ['binario', 'sistema binario', 'bits', 'byte'],
-                respuesta: "<b>Sistema Binario en Informática:</b><br>Es el sistema de numeración base 2 utilizado por las computadoras digitalmente. Solo emplea los dígitos <b>0</b> (apagado/sin voltaje) y <b>1</b> (encendido/con voltaje).<br>• 1 Bit = La unidad mínima (0 o 1).<br>• 1 Byte = 8 Bits de información."
-            },
-            {
-                claves: ['ram', 'memoria ram', 'hardware'],
-                respuesta: "<b>Memoria RAM (Random Access Memory):</b><br>Es la memoria de acceso aleatorio y almacenamiento temporal de la computadora. Guarda las instrucciones y programas ejecutados en el instante. Al apagar el equipo, su contenido se borra completamente (memoria volátil)."
-            },
-            {
-                claves: ['cpu', 'procesador'],
-                respuesta: "<b>CPU (Unidad Central de Procesamiento):</b><br>Conocido como el 'cerebro' de la computadora. Se encarga de interpretar instrucciones, ejecutar el sistema operativo y procesar todos los cálculos matemáticos y lógicos de los programas."
-            }
-        ];
-
-        function usarSugerencia(texto) {
-            document.getElementById('ai-input').value = texto;
-            enviarPreguntaIA(new Event('submit'));
-        }
-
-        // 7. Integración con API de IA Inteligente (Gemini API + Respaldo Local)
-        async function enviarPreguntaIA(event) {
-            event.preventDefault();
-            const inputElem = document.getElementById('ai-input');
-            const userText = inputElem.value.trim();
-            if (!userText) return;
-
-            const chatHistory = document.getElementById('ai-chat-history');
-            const sendBtn = document.getElementById('ai-send-btn');
-
-            const userMsgHTML = `
-                <div class="flex gap-3 items-start justify-end">
-                    <div class="bg-indigo-600 text-white rounded-2xl p-3 shadow-sm max-w-[85%] text-sm leading-relaxed">
-                        ${escapeHTML(userText)}
-                    </div>
-                    <div class="w-8 h-8 rounded-lg bg-slate-800 text-white flex items-center justify-center shrink-0 font-bold text-xs">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                </div>
-            `;
-            chatHistory.insertAdjacentHTML('beforeend', userMsgHTML);
-            inputElem.value = '';
-            chatHistory.scrollTop = chatHistory.scrollHeight;
-
-            // Indicador de carga
-            const loadingId = 'ai-loading-' + Date.now();
-            const loadingHTML = `
-                <div id="${loadingId}" class="flex gap-3 items-start">
-                    <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold text-xs">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm text-slate-500 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-circle-notch animate-spin text-indigo-600"></i>
-                        <span>Generando respuesta detallada...</span>
-                    </div>
-                </div>
-            `;
-            chatHistory.insertAdjacentHTML('beforeend', loadingHTML);
-            chatHistory.scrollTop = chatHistory.scrollHeight;
-
-            sendBtn.disabled = true;
-
-            try {
-                // Llamada directa a Gemini 3 Flash API
-                const apiKey = ""; // Runtime inyectado automáticamente
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-                const systemPrompt = "Eres un profesor interactivo y amable de Computación Básica e Informática para estudiantes de preparatoria/bachillerato. Tu trabajo es dar explicaciones claras, pedagógicas, con ejemplos sencillos y estructuradas con formato HTML (usa <b>, <i>, <code>, <pre>, listas <ul> o <ol>) para facilitar la lectura.";
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userText }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
+                // Resaltar la opción correcta
+                botones.forEach(b => {
+                    if (b.innerText === correcta) {
+                        b.classList.add('btn-correct');
+                    }
                 });
 
-                const data = await response.json();
-                let respuesta = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                feedback.innerText = `¡Incorrecto! La combinación correcta era: ${correcta}`;
+                feedback.classList.remove('hidden');
+                feedback.classList.add('bg-red-100', 'text-red-800');
 
-                if (respuesta) {
-                    // Formatear respuestas de markdown a html básico para mejor presentación
-                    respuesta = respuesta
-                        .replace(/```([\s\S]*?)```/g, '<pre class="bg-slate-900 text-emerald-400 p-3 rounded-xl my-2 text-xs font-mono overflow-x-auto">$1</pre>')
-                        .replace(/`([^`]+)`/g, '<code class="bg-slate-100 text-pink-600 px-1.5 py-0.5 rounded text-xs font-mono">$1</code>')
-                        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-                        .replace(/\n\n/g, '<br><br>')
-                        .replace(/\n/g, '<br>');
-                } else {
-                    respuesta = obtenerRespuestaLocal(userText);
+                setTimeout(() => {
+                    container.classList.remove('animate-shake');
+                    juegoIndice++;
+                    mostrarPreguntaJuego();
+                }, 1800);
+            }
+        }
+
+        function marcarErrorTiempo(correcta) {
+            const container = document.getElementById('game-container');
+            const feedback = document.getElementById('game-feedback');
+            const botones = document.querySelectorAll('#game-options button');
+
+            botones.forEach(b => {
+                b.disabled = true;
+                if (b.innerText === correcta) {
+                    b.classList.add('btn-correct');
                 }
+            });
 
-                renderizarRespuestaIA(loadingId, respuesta);
+            container.classList.add('animate-shake');
+            feedback.innerText = `¡Se agotó el tiempo! La opción correcta era: ${correcta}`;
+            feedback.classList.remove('hidden');
+            feedback.classList.add('bg-red-100', 'text-red-800');
 
-            } catch (err) {
-                // Si la red falla o está offline, usa la base de conocimiento local estructurada
-                const respuestaLocal = obtenerRespuestaLocal(userText);
-                renderizarRespuestaIA(loadingId, respuestaLocal);
-            } finally {
-                sendBtn.disabled = false;
-                chatHistory.scrollTop = chatHistory.scrollHeight;
+            setTimeout(() => {
+                container.classList.remove('animate-shake');
+                juegoIndice++;
+                mostrarPreguntaJuego();
+            }, 1800);
+        }
+
+        function finalizarJuego() {
+            document.getElementById('game-play-screen').classList.add('hidden');
+            document.getElementById('game-end-screen').classList.remove('hidden');
+            document.getElementById('final-game-score').innerText = juegoPuntos;
+        }
+
+        // 6. Evaluación sencilla para el Cuestionario
+        function evaluarQuiz(button, esCorrecta) {
+            const parent = button.parentElement;
+            const buttons = parent.querySelectorAll('button');
+
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-100');
+            });
+
+            if (esCorrecta) {
+                button.classList.add('btn-correct');
+            } else {
+                button.classList.add('btn-wrong');
             }
         }
-
-        function renderizarRespuestaIA(loadingId, respuestaText) {
-            const loadingElem = document.getElementById(loadingId);
-            if (loadingElem) {
-                loadingElem.outerHTML = `
-                    <div class="flex gap-3 items-start">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold text-xs">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm max-w-[85%] text-slate-700 leading-relaxed text-sm">
-                            ${respuestaText}
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        function obtenerRespuestaLocal(userText) {
-            const textLower = userText.toLowerCase();
-            for (const item of baseConocimiento) {
-                if (item.claves.some(k => textLower.includes(k))) {
-                    return item.respuesta;
-                }
-            }
-            return `Entendido tu consulta sobre <b>"${escapeHTML(userText)}"</b>.<br><br><b>Resumen temático general:</b><br>• <b>Word:</b> Formato APA, márgenes 2.54cm, estilos de título e índices.<br>• <b>Excel:</b> Funciones =SUMA, =PROMEDIO, =SI, =BUSCARV.<br>• <b>PowerPoint:</b> Regla 6x6 y contraste visual.<br>• <b>Ciberseguridad:</b> Contraseñas seguras y prevención de fraude.`;
-        }
-
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-            );
-        }
-
-        // Inicializaciones al cargar la página
-        window.onload = function() {
-            calcularPromedio();
-            renderizarAtajos(listaAtajos);
-            iniciarMinijuego();
-            cargarQuiz();
-        };
     </script>
 </body>
 </html>
