@@ -1,4 +1,4 @@
-[aprende_computaci_n_b_sica_preparatoria (3.html](https://github.com/user-attachments/files/33849402/aprende_computaci_n_b_sica_preparatoria.3.html)
+[656.html](https://github.com/user-attachments/files/33849530/656.html)
 <!DOCTYPE html>
 <html lang="es-MX" class="scroll-smooth">
 <head>
@@ -12,89 +12,102 @@
     <!-- QRCode.js para generación de QR en tiempo real -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <!-- Tipografía Inter & Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { 
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #f8fafc;
-            color: #1e293b;
+            color: #0f172a;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Outfit', sans-serif;
         }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* Animaciones para el minijuego y quizzes */
+        /* Animaciones artesanales para interacciones fluidas */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
         }
-        .animate-shake { animation: shake 0.4s ease-in-out; }
+        .animate-shake { animation: shake 0.35s cubic-bezier(.36,.07,.19,.97); }
 
         .btn-correct {
-            background-color: #16a34a !important;
+            background-color: #10b981 !important;
             color: #ffffff !important;
-            border-color: #15803d !important;
+            border-color: #059669 !important;
         }
         .btn-wrong {
-            background-color: #dc2626 !important;
+            background-color: #ef4444 !important;
             color: #ffffff !important;
-            border-color: #b91c1c !important;
+            border-color: #dc2626 !important;
         }
+
+        /* Ocultar barra de desplazamiento sin perder funcionalidad */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
 
-    <!-- Encabezado Estilo Portal Escolar Real -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('inicio')">
-                <div class="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center text-white shadow-sm font-bold text-lg">
-                    <i class="fa-solid fa-graduation-cap"></i>
+    <!-- Encabezado con estética limpia y humana -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('inicio')">
+                <div class="w-10 h-10 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-2xl flex items-center justify-center text-white shadow-md shadow-indigo-200 group-hover:scale-105 transition duration-200">
+                    <i class="fa-solid fa-laptop-code text-base"></i>
                 </div>
                 <div>
-                    <h1 class="text-base font-bold text-slate-900 leading-tight">Materia de Computación I</h1>
-                    <p class="text-xs text-slate-500">Preparatoria No. 181 • Apoyos de Clase</p>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-base font-bold text-slate-900 leading-tight">Computación I</h1>
+                        <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100">Prep. 181</span>
+                    </div>
+                    <p class="text-xs text-slate-500">Material de consulta rápida y ejercicios</p>
                 </div>
             </div>
 
-            <!-- Acciones de Cabecera -->
+            <!-- Acciones directas -->
             <div class="flex items-center space-x-2">
-                <button onclick="toggleQRModal()" class="inline-flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-lg transition border border-slate-200">
-                    <i class="fa-solid fa-qrcode text-slate-500"></i>
-                    <span>Abrir en celular (QR)</span>
+                <button onclick="toggleQRModal()" class="inline-flex items-center space-x-2 bg-slate-100 hover:bg-slate-200/80 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl transition border border-slate-200/70">
+                    <i class="fa-solid fa-mobile-screen-button text-slate-500"></i>
+                    <span class="hidden sm:inline">Ver en celular</span>
                 </button>
             </div>
         </div>
 
-        <!-- Menú de Navegación Pestañas -->
-        <nav class="bg-slate-100/80 border-t border-slate-200 overflow-x-auto scrollbar-none">
-            <div class="max-w-7xl mx-auto px-2 flex space-x-1 min-w-max py-1 text-xs sm:text-sm font-medium text-slate-600">
-                <button onclick="switchTab('inicio')" id="nav-inicio" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5 active">
-                    <i class="fa-solid fa-house text-slate-400"></i> Inicio
+        <!-- Menú de Navegación Tipo Tabs Orgánico -->
+        <nav class="bg-slate-50/60 border-t border-slate-200/60 overflow-x-auto no-scrollbar">
+            <div class="max-w-7xl mx-auto px-3 flex space-x-1 min-w-max py-1.5 text-xs font-medium text-slate-600">
+                <button onclick="switchTab('inicio')" id="nav-inicio" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2 active shadow-sm bg-white text-slate-900">
+                    <i class="fa-solid fa-compass text-indigo-500"></i> Inicio
                 </button>
-                <button onclick="switchTab('word')" id="nav-word" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                <button onclick="switchTab('word')" id="nav-word" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
                     <i class="fa-solid fa-file-word text-blue-600"></i> Word
                 </button>
-                <button onclick="switchTab('excel')" id="nav-excel" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                <button onclick="switchTab('excel')" id="nav-excel" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
                     <i class="fa-solid fa-file-excel text-emerald-600"></i> Excel
                 </button>
-                <button onclick="switchTab('powerpoint')" id="nav-powerpoint" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                <button onclick="switchTab('powerpoint')" id="nav-powerpoint" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
                     <i class="fa-solid fa-file-powerpoint text-orange-600"></i> PowerPoint
                 </button>
-                <button onclick="switchTab('seguridad')" id="nav-seguridad" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-shield-halved text-indigo-600"></i> Internet y Nube
+                <button onclick="switchTab('seguridad')" id="nav-seguridad" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-lock text-sky-600"></i> Nube y Redes
                 </button>
-                <button onclick="switchTab('libros')" id="nav-libros" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-book-bookmark text-amber-600"></i> Guías y Libros
+                <button onclick="switchTab('libros')" id="nav-libros" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-amber-600"></i> Guías
                 </button>
-                <button onclick="switchTab('atajos')" id="nav-atajos" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                <button onclick="switchTab('atajos')" id="nav-atajos" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
                     <i class="fa-solid fa-keyboard text-slate-500"></i> Atajos
                 </button>
-                <button onclick="switchTab('juego')" id="nav-juego" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
+                <button onclick="switchTab('juego')" id="nav-juego" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
                     <i class="fa-solid fa-gamepad text-purple-600"></i> Minijuego
                 </button>
-                <button onclick="switchTab('quiz')" id="nav-quiz" class="tab-btn px-3 py-2 rounded-md hover:bg-white hover:text-slate-900 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-check-double text-teal-600"></i> Quiz Repaso
+                <button onclick="switchTab('ia-chat')" id="nav-ia-chat" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2 font-semibold text-indigo-700 bg-indigo-50/70 border border-indigo-100">
+                    <i class="fa-solid fa-sparkles text-indigo-600"></i> Asistente Escolar
+                </button>
+                <button onclick="switchTab('quiz')" id="nav-quiz" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-teal-600"></i> Repaso
                 </button>
             </div>
         </nav>
@@ -105,171 +118,74 @@
 
         <!-- 1. PESTAÑA: INICIO -->
         <section id="tab-inicio" class="tab-content active space-y-8">
-            <!-- Banner de Bienvenida -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
-                <div class="max-w-3xl relative z-10 space-y-4">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                        <i class="fa-solid fa-circle-info"></i> Material de Apoyo Semestral
+            <!-- Hero Banner con diseño editorial -->
+            <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-10 text-white relative overflow-hidden shadow-xl">
+                <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="max-w-2xl space-y-4 relative z-10">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-400/20 backdrop-blur-sm">
+                        <i class="fa-solid fa-graduation-cap"></i> Preparatoria 181 • Semestre Actual
                     </span>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Guía Práctica de Herramientas Digitales para Bachillerato</h2>
-                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                        Este espacio reúne las explicaciones sencillas, reglas clave y ejercicios resueltos para las clases de cómputo. Aquí encuentras lo necesario para entregar tus trabajos escolares con buen formato en Word, hacer tablas en Excel, diseñar diapositivas legibles en PowerPoint y buscar información confiable en Internet.
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                        Aprende computación de forma clara, práctica y sin rodeos.
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Un espacio diseñado por y para estudiantes. Encuentra trucos rápidos, ejemplos listos para aplicar en tus proyectos y herramientas para entregar mejores trabajos en clase.
                     </p>
-                    <div class="flex flex-wrap gap-3 pt-2">
-                        <button onclick="switchTab('word')" class="bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition shadow-sm inline-flex items-center gap-2">
-                            <span>Ver Temario de Word</span>
+                    <div class="flex flex-wrap gap-3 pt-3">
+                        <button onclick="switchTab('word')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-2xl transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                            <span>Explorar Guías de Word</span>
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
-                        <button onclick="switchTab('juego')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2.5 rounded-xl transition border border-slate-200 inline-flex items-center gap-2">
-                            <i class="fa-solid fa-gamepad text-purple-600"></i>
-                            <span>Probar Minijuego de Atajos</span>
+                        <button onclick="switchTab('juego')" class="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-2xl transition border border-white/10 backdrop-blur-sm flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-purple-400"></i>
+                            <span>Practicar Atajos</span>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Accesos Rápidos por Módulo -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div onclick="switchTab('word')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition cursor-pointer space-y-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold group-hover:bg-blue-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-file-word text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Procesador Word</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Aprende a configurar formato APA, índices automáticos, saltos de página y márgenes oficiales para reportes.</p>
-                </div>
-
-                <div onclick="switchTab('excel')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-md transition cursor-pointer space-y-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold group-hover:bg-emerald-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-file-excel text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">Hojas de Excel</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Fórmulas básicas (=PROMEDIO, =SUMA, =SI), formato condicional y cómo construir tablas claras de datos.</p>
-                </div>
-
-                <div onclick="switchTab('powerpoint')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-orange-300 hover:shadow-md transition cursor-pointer space-y-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold group-hover:bg-orange-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-file-powerpoint text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-orange-600 transition">Presentaciones PPT</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Aplica la regla 6x6, selecciona contrastes de color adecuados y evita diapositivas cargadas de texto.</p>
-                </div>
-
-                <div onclick="switchTab('seguridad')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-indigo-300 hover:shadow-md transition cursor-pointer space-y-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold group-hover:bg-indigo-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-shield-halved text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition">Internet y Nube</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Búsquedas avanzadas en Google, gestión de archivos en Drive/OneDrive y protección contra phishing.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. PESTAÑA: WORD -->
-        <section id="tab-word" class="tab-content space-y-6">
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-file-word"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-900">Microsoft Word: Formato y Reportes Escolares</h2>
-                        <p class="text-xs text-slate-500">Pasos prácticos para entregar trabajos limpios y con buena estructura.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Tarjeta 1 -->
-                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
-                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-list-ol text-blue-600"></i> Generar Índice Automático
-                        </h3>
-                        <ol class="list-decimal list-inside text-xs text-slate-600 space-y-1">
-                            <li>Aplica el estilo <strong>"Título 1"</strong> a los temas principales y <strong>"Título 2"</strong> a los subtemas desde la pestaña <i>Inicio</i>.</li>
-                            <li>Coloca el cursor al inicio del documento o en una hoja en blanco.</li>
-                            <li>Ve a la pestaña <strong>Referencias</strong> &gt; <strong>Tabla de contenido</strong> y selecciona la opción deseada.</li>
-                            <li>Si agregas más información después, haz clic derecho sobre el índice y presiona <strong>"Actualizar campos"</strong>.</li>
-                        </ol>
-                    </div>
-
-                    <!-- Tarjeta 2 -->
-                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-2">
-                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-paragraph text-blue-600"></i> Estructura Básica de Formato (Estilo Escolar)
-                        </h3>
-                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1">
-                            <li><strong>Tipografía recomendada:</strong> Arial 11 pt, Calibri 11 pt o Times New Roman 12 pt.</li>
-                            <li><strong>Interlineado:</strong> 1.5 líneas para facilitar la revisión del profesor.</li>
-                            <li><strong>Alineación:</strong> Texto justificado (Ctrl + J) para cuerpo general; títulos alineados a la izquierda.</li>
-                            <li><strong>Márgenes:</strong> Estándar de 2.5 cm en los cuatro bordes (Superior, Inferior, Izquierdo, Derecho).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. PESTAÑA: EXCEL -->
-        <section id="tab-excel" class="tab-content space-y-6">
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-file-excel"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-900">Microsoft Excel: Tablas y Fórmulas Básicas</h2>
-                        <p class="text-xs text-slate-500">Aprende la sintaxis de las funciones principales para resolver tareas numéricas.</p>
-                    </div>
-                </div>
-
-                <!-- Explicación de Fórmulas -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="border border-slate-200 rounded-xl p-4 bg-emerald-50/50 space-y-2">
-                        <span class="font-mono text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">=SUMA(A1:A10)</span>
-                        <p class="text-xs text-slate-600 leading-relaxed">Suma todos los valores numéricos que se encuentran dentro del rango seleccionado.</p>
-                    </div>
-                    <div class="border border-slate-200 rounded-xl p-4 bg-emerald-50/50 space-y-2">
-                        <span class="font-mono text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">=PROMEDIO(B1:B5)</span>
-                        <p class="text-xs text-slate-600 leading-relaxed">Calcula la media aritmética del grupo de celdas indicadas.</p>
-                    </div>
-                    <div class="border border-slate-200 rounded-xl p-4 bg-emerald-50/50 space-y-2">
-                        <span class="font-mono text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">=SI(C1&gt;=6, "Aprobado", "Reprobado")</span>
-                        <p class="text-xs text-slate-600 leading-relaxed">Evalúa una condición lógica y devuelve un texto según el resultado.</p>
-                    </div>
-                </div>
-
-                <!-- SIMULADOR INTERACTIVO DE PROMEDIOS DE EXCEL -->
-                <div class="border border-emerald-200 bg-white rounded-xl p-5 space-y-4">
-                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-calculator text-emerald-600"></i> Simulador Interactivo de Calificaciones en Excel
-                    </h3>
-                    <p class="text-xs text-slate-500">Ingresa tres calificaciones hipotéticas para simular cómo Excel calcula el promedio final y evalúa la condición de aprobación automáticamente.</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1">Parcial 1 (A2)</label>
-                            <input type="number" id="calc-p1" min="0" max="10" value="8" oninput="calcularSimuladorExcel()" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 px-1">Módulos principales de estudio</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div onclick="switchTab('word')" class="bg-white p-6 rounded-2xl border border-slate-200/80 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition duration-200 cursor-pointer space-y-3 group">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold group-hover:bg-blue-600 group-hover:text-white transition duration-200 shadow-sm">
+                            <i class="fa-solid fa-file-word text-xl"></i>
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1">Parcial 2 (B2)</label>
-                            <input type="number" id="calc-p2" min="0" max="10" value="7" oninput="calcularSimuladorExcel()" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1">Parcial 3 (C2)</label>
-                            <input type="number" id="calc-p3" min="0" max="10" value="5" oninput="calcularSimuladorExcel()" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                            <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Word Profesional</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mt-1">Formato APA, índices automáticos, saltos de sección y márgenes correctos.</p>
                         </div>
                     </div>
 
-                    <div class="bg-slate-900 text-slate-100 rounded-xl p-4 space-y-2 text-xs font-mono">
-                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                            <span class="text-slate-400">Fórmula ejecutada:</span>
-                            <span class="text-emerald-400 font-bold">=PROMEDIO(A2:C2)</span>
+                    <div onclick="switchTab('excel')" class="bg-white p-6 rounded-2xl border border-slate-200/80 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-500/5 transition duration-200 cursor-pointer space-y-3 group">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold group-hover:bg-emerald-600 group-hover:text-white transition duration-200 shadow-sm">
+                            <i class="fa-solid fa-file-excel text-xl"></i>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span>Promedio Resultante:</span>
-                            <span id="res-promedio" class="text-lg font-bold text-white">6.6</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">Excel Práctico</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mt-1">Suma, promedios, función =SI y simulador dinámico de calificaciones.</p>
                         </div>
-                        <div class="flex justify-between items-center border-t border-slate-800 pt-2">
-                            <span>Evaluación =SI(Promedio&gt;=6, "Aprobado", "Reprobado"):</span>
-                            <span id="res-estatus" class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900 text-emerald-300">Aprobado</span>
+                    </div>
+
+                    <div onclick="switchTab('powerpoint')" class="bg-white p-6 rounded-2xl border border-slate-200/80 hover:border-orange-300 hover:shadow-xl hover:shadow-orange-500/5 transition duration-200 cursor-pointer space-y-3 group">
+                        <div class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold group-hover:bg-orange-600 group-hover:text-white transition duration-200 shadow-sm">
+                            <i class="fa-solid fa-file-powerpoint text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 group-hover:text-orange-600 transition">PowerPoint Limpio</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mt-1">La regla 6x6, paletas de color con buen contraste e impacto en clase.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="switchTab('seguridad')" class="bg-white p-6 rounded-2xl border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition duration-200 cursor-pointer space-y-3 group">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold group-hover:bg-sky-600 group-hover:text-white transition duration-200 shadow-sm">
+                            <i class="fa-solid fa-shield-halved text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 group-hover:text-sky-600 transition">Nube y Seguridad</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mt-1">Búsquedas avanzadas en Google, organización en Drive y prevención de fraudes.</p>
                         </div>
                     </div>
                 </div>
@@ -498,6 +414,65 @@
                             Volver a Intentar
                         </button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8.5. PESTAÑA: ASISTENTE DE IA (PREGUNTAS) -->
+        <section id="tab-ia-chat" class="tab-content space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Tutor Escolar de Computación</h2>
+                        <p class="text-xs text-slate-500">Haz una pregunta sobre tus tareas o temas del temario.</p>
+                    </div>
+                </div>
+
+                <!-- Sugerencias de Preguntas -->
+                <div class="space-y-2">
+                    <p class="text-xs font-semibold text-slate-500">Preguntas comunes:</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <button onclick="usarSugerencia('¿Cómo hago un índice automático en Word?')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+                            ¿Cómo hago un índice en Word?
+                        </button>
+                        <button onclick="usarSugerencia('¿Cómo funciona la función =SI en Excel? Explica con un ejemplo fácil.')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+                            ¿Cómo funciona la función =SI en Excel?
+                        </button>
+                        <button onclick="usarSugerencia('¿Qué es la regla 6x6 en PowerPoint?')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+                            ¿Qué es la regla 6x6 en PPT?
+                        </button>
+                        <button onclick="usarSugerencia('¿Cuáles son los atajos más importantes para trabajar rápido en la computadora?')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+                            Atajos clave de teclado
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Caja del Chat -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden flex flex-col h-[400px]">
+                    <!-- Contenedor de Mensajes -->
+                    <div id="ai-chat-history" class="flex-grow p-4 overflow-y-auto space-y-4 text-xs">
+                        <!-- Mensaje de bienvenida del bot -->
+                        <div class="flex gap-3 items-start">
+                            <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold shadow-sm">
+                                <i class="fa-solid fa-graduation-cap text-xs"></i>
+                            </div>
+                            <div class="bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-sm max-w-[85%] text-slate-700 leading-relaxed">
+                                ¡Hola! 👋 Soy el asistente de Computación I de la prepa.<br><br>¿Tienes dudas con alguna fórmula de Excel, formato de Word o cómo estructurar una presentación? Escribe tu duda y te ayudo paso a paso.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input y Botón de Envío -->
+                    <form onsubmit="enviarPreguntaIA(event)" class="p-3 bg-white border-t border-slate-200 flex gap-2 items-center">
+                        <input type="text" id="ai-input" placeholder="Escribe tu duda sobre computación básica aquí..." class="flex-grow border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                        <button type="submit" id="ai-send-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shrink-0 shadow-sm">
+                            <span>Preguntar</span>
+                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -830,6 +805,132 @@
             } else {
                 button.classList.add('btn-wrong');
             }
+        }
+
+        // 7. Integración con la API de IA (Gemini)
+        function usarSugerencia(texto) {
+            document.getElementById('ai-input').value = texto;
+            enviarPreguntaIA(new Event('submit'));
+        }
+
+        async function enviarPreguntaIA(event) {
+            event.preventDefault();
+            const inputElem = document.getElementById('ai-input');
+            const userText = inputElem.value.trim();
+            if (!userText) return;
+
+            const chatHistory = document.getElementById('ai-chat-history');
+            const sendBtn = document.getElementById('ai-send-btn');
+
+            // 1. Mostrar mensaje del usuario
+            const userMsgHTML = `
+                <div class="flex gap-3 items-start justify-end">
+                    <div class="bg-blue-600 text-white rounded-2xl p-3 shadow-sm max-w-[85%] leading-relaxed">
+                        ${escapeHTML(userText)}
+                    </div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-800 text-white flex items-center justify-center shrink-0 font-bold">
+                        <i class="fa-solid fa-user text-xs"></i>
+                    </div>
+                </div>
+            `;
+            chatHistory.insertAdjacentHTML('beforeend', userMsgHTML);
+            inputElem.value = '';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // 2. Mostrar indicador de "Pensando..."
+            const loadingId = 'loading-' + Date.now();
+            const loadingHTML = `
+                <div id="${loadingId}" class="flex gap-3 items-start">
+                    <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold">
+                        <i class="fa-solid fa-robot text-xs animate-spin"></i>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm text-slate-500 italic">
+                        Escribiendo respuesta...
+                    </div>
+                </div>
+            `;
+            chatHistory.insertAdjacentHTML('beforeend', loadingHTML);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // Deshabilitar botón temporalmente
+            sendBtn.disabled = true;
+
+            try {
+                // Prompt del sistema para limitar las respuestas al ámbito de Computación Básica de Preparatoria
+                const systemPrompt = `Eres un profesor/tutor amable y didáctico de la materia 'Computación I' para alumnos de Preparatoria (Bachillerato).
+Tu trabajo es responder dudas de manera clara, concisa y con un lenguaje accesible para estudiantes jóvenes.
+Tus temas principales son:
+1. Procesador de Textos (Microsoft Word): Índices automáticos, formato APA, sangrías, márgenes, interlineado.
+2. Hojas de Cálculo (Microsoft Excel): Fórmulas básicas (=SUMA, =PROMEDIO, =SI, =CONTAR), celdas, rangos, gráficos.
+3. Presentaciones (Microsoft PowerPoint): Regla 6x6, diseño, contraste, animaciones básicas.
+4. Internet, Nube y Seguridad: Búsquedas con comillas y filetype:pdf, Google Drive, OneDrive, prevención de phishing.
+5. Atajos de Teclado (Ctrl+C, Ctrl+V, Ctrl+Z, Ctrl+G, etc.).
+
+REGLA STRICTA DE SEGURIDAD:
+Si el usuario pregunta algo que NO esté relacionado con informática, computación básica, software de oficina, tecnología o estudio escolar, responde cortésmente diciendo: "Lo siento, como tutor de Computación I solo puedo ayudarte con temas relacionados a informática básica, procesadores de texto, hojas de cálculo, presentaciones, internet y herramientas digitales para tus estudios. ¿Tienes alguna pregunta sobre estos temas?"
+Mantén respuestas breves (1 a 3 párrafos cortos) y organizadas.`;
+
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userText }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                const aiReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Lo siento, no pude procesar tu respuesta en este momento. Intenta preguntar de nuevo.";
+
+                // Remover loader
+                const loader = document.getElementById(loadingId);
+                if (loader) loader.remove();
+
+                // Formatear saltos de línea e incrustar la respuesta de la IA
+                const formattedReply = escapeHTML(aiReply).replace(/\n/g, '<br>');
+
+                const aiMsgHTML = `
+                    <div class="flex gap-3 items-start">
+                        <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-robot text-xs"></i>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm max-w-[85%] text-slate-700 leading-relaxed">
+                            ${formattedReply}
+                        </div>
+                    </div>
+                `;
+                chatHistory.insertAdjacentHTML('beforeend', aiMsgHTML);
+
+            } catch (err) {
+                const loader = document.getElementById(loadingId);
+                if (loader) loader.remove();
+
+                const errorHTML = `
+                    <div class="flex gap-3 items-start">
+                        <div class="w-8 h-8 rounded-lg bg-red-600 text-white flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-triangle-exclamation text-xs"></i>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 rounded-2xl p-3 shadow-sm max-w-[85%] text-red-700">
+                            Hubo un problema al conectar con el servidor de IA. Por favor verifica tu conexión e inténtalo de nuevo.
+                        </div>
+                    </div>
+                `;
+                chatHistory.insertAdjacentHTML('beforeend', errorHTML);
+            } finally {
+                sendBtn.disabled = false;
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
         }
     </script>
 </body>
