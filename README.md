@@ -1,6 +1,13 @@
+[HUHI.html](https://github.com/user-attachments/files/33892805/HUHI.html)
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
+    <!-- 
+      CompuPrep 181 - Portal Educativo de Apoyo
+      Desarrollado para la materia de Informática I y II
+      Plantel Preparatoria N° 181
+      Año: 2026
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprende Computación Básica - Preparatoria</title>
@@ -44,6 +51,19 @@
         .ai-formatted-content table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.85rem; }
         .ai-formatted-content th, .ai-formatted-content td { border: 1px solid #cbd5e1; padding: 0.4rem 0.6rem; text-align: left; }
         .ai-formatted-content th { background-color: #f1f5f9; font-weight: 600; }
+        
+        /* Ajustes tipográficos manuales */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        kbd {
+            border-bottom: 2px solid #94a3b8;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -58,16 +78,16 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-lg leading-tight">CompuPrep 181</h1>
-                        <p class="text-xs text-slate-400">Portal de Computación Básica e Informática</p>
+                        <p class="text-xs text-slate-400">Portal Educativo de Informática I y II</p>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Sistema de Consulta Interactivo Integrado
+                    <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-medium bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                        <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                        Ciclo Escolar 2026 - Material de Apoyo
                     </span>
                     <button onclick="descargarCodigoPagina()" class="py-1 px-3 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all flex items-center gap-1.5 shadow-sm">
-                        <i class="fa-solid fa-download"></i> Descargar Web App
+                        <i class="fa-solid fa-download"></i> Guardar Copia Offline
                     </button>
                 </div>
             </div>
@@ -86,25 +106,25 @@
                     <i class="fa-solid fa-file-powerpoint text-orange-400"></i> PowerPoint
                 </button>
                 <button onclick="changeTab('libros')" id="tab-libros" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-book-bookmark text-amber-400"></i> Guías y Libros
+                    <i class="fa-solid fa-book-bookmark text-amber-400"></i> Lecturas y Enlaces
                 </button>
                 <button onclick="changeTab('atajos')" id="tab-atajos" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-keyboard text-purple-400"></i> Atajos de Teclado
+                    <i class="fa-solid fa-keyboard text-purple-400"></i> Atajos
                 </button>
                 <button onclick="changeTab('juego')" id="tab-juego" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-gamepad text-pink-400"></i> Desafío Atajos
+                    <i class="fa-solid fa-gamepad text-pink-400"></i> Práctica Visual
                 </button>
                 <button onclick="changeTab('quiz')" id="tab-quiz" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Quiz Evaluativo
+                    <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Autoevaluación
                 </button>
                 <button onclick="changeTab('ia')" id="tab-ia" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-comments text-indigo-400"></i> Asesor Educativo
+                    <i class="fa-solid fa-comments text-indigo-400"></i> Consultas al Prof. Juan
                 </button>
                 <button onclick="changeTab('descargar')" id="tab-descargar" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-mobile-screen-button text-emerald-400"></i> Instalar / App
+                    <i class="fa-solid fa-mobile-screen-button text-emerald-400"></i> Guardar App
                 </button>
                 <button onclick="changeTab('qr')" id="tab-qr" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:bg-slate-700">
-                    <i class="fa-solid fa-qrcode text-rose-400"></i> Código QR
+                    <i class="fa-solid fa-qrcode text-rose-400"></i> Compartir QR
                 </button>
             </div>
         </nav>
@@ -116,13 +136,19 @@
         <!-- PESTAÑA: WORD -->
         <section id="content-word" class="tab-content block space-y-6">
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <!-- Nota estilo aviso del docente -->
+                <div class="mb-6 p-4 rounded-xl bg-amber-50 border-l-4 border-amber-400 text-slate-700 text-xs">
+                    <p class="font-bold mb-1 text-amber-900"><i class="fa-solid fa-circle-info mr-1"></i> Indicaciones del Laboratorio (Prof. Juan):</p>
+                    <p>Jóvenes: para la entrega del reporte final de este parcial, la carátula y el formato de bibliografía deben seguir obligatoriamente las especificaciones de la norma APA mostradas abajo. Eviten entregar archivos con formato libre o fuentes no autorizadas.</p>
+                </div>
+
                 <div class="flex items-center gap-3 mb-4">
                     <div class="bg-blue-100 text-blue-600 p-3 rounded-xl">
                         <i class="fa-solid fa-file-word text-2xl"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800">Microsoft Word: Guía Práctica de Formato y Estilos</h2>
-                        <p class="text-sm text-slate-500">Tutoriales paso a paso para edición, formato tipográfico, colores, bordes y diseño académico</p>
+                        <h2 class="text-xl font-bold text-slate-800">Microsoft Word: Guía Práctica de Elaboración de Documentos</h2>
+                        <p class="text-sm text-slate-500">Pasos recomendados para la edición y entrega de trabajos escolares en el plantel</p>
                     </div>
                 </div>
 
@@ -130,42 +156,34 @@
                 <div class="grid md:grid-cols-3 gap-4 mb-6">
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
                         <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-font text-blue-600"></i> Cambiar Fuente, Tamaños y Colores
+                            <i class="fa-solid fa-font text-blue-600"></i> Edición de Letra y Estilo
                         </h3>
                         <ol class="text-xs text-slate-600 space-y-2 list-decimal list-inside">
-                            <li><b>Seleccionar Texto:</b> Haz clic y arrastra sobre el texto que deseas modificar (o presiona <kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + E</kbd> para todo el documento).</li>
-                            <li><b>Cambiar Fuente y Tamaño:</b> En la pestaña <b>Inicio</b>, usa el menú desplegable de fuentes (ej. <i>Arial</i>, <i>Times New Roman</i>) y el número de tamaño (ej. <i>12pt</i>).</li>
-                            <li><b>Color de Fuente:</b> En la pestaña <b>Inicio</b>, busca el icono <b class="text-blue-600 font-bold">A</b> con una barra de color debajo. Haz clic en la flecha pequeña para elegir un color de la paleta.</li>
-                            <li><b>Resaltado de Texto:</b> Usa el icono del plumón marca-textos (<b class="bg-amber-200 px-1 rounded">ab</b>) para dar un fondo amarillo, verde o azul a palabras clave.</li>
+                            <li><b>Seleccionar Texto:</b> Haz clic e ilumina el párrafo con el ratón (o usa <kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + E</kbd> para marcar todo el texto).</li>
+                            <li><b>Selección de Fuente:</b> En la pestaña <b>Inicio</b>, ajusta el tipo de letra a <i>Arial</i> o <i>Times New Roman</i> según las indicaciones del docente.</li>
+                            <li><b>Colores de Resaltado:</b> Utiliza el icono <b class="text-blue-600 font-bold">A</b> con la barra inferior para títulos principales y la herramienta de resaltado para referencias clave.</li>
                         </ol>
                     </div>
 
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
                         <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-align-left text-blue-600"></i> Alineación, Interlineado y Sangrías
+                            <i class="fa-solid fa-align-left text-blue-600"></i> Formato de Párrafo e Interlineado
                         </h3>
                         <ol class="text-xs text-slate-600 space-y-2 list-decimal list-inside">
-                            <li><b>Alineaciones de Párrafo:</b> En la sección <i>Párrafo</i> de la pestaña <b>Inicio</b>:
-                                <ul class="list-disc list-inside ml-2 mt-1 text-slate-500">
-                                    <li><b>Izquierda (<kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + Q</kbd>):</b> Para párrafos estándar.</li>
-                                    <li><b>Centrado (<kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + T</kbd>):</b> Para títulos y portadas.</li>
-                                    <li><b>Derecha (<kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + D</kbd>):</b> Para fechas o firmas.</li>
-                                    <li><b>Justificado (<kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + J</kbd>):</b> Alinea ambos márgenes uniformemente.</li>
-                                </ul>
-                            </li>
-                            <li><b>Espaciado e Interlineado:</b> Haz clic en el icono de flechas subiendo y bajando (<i class="fa-solid fa-text-height text-blue-500"></i>) para cambiar a 1.0, 1.5 o 2.0 (Doble).</li>
-                            <li><b>Sangría de Primera Línea:</b> Arrastra el triángulo superior de la regla en la parte alta o presiona <kbd class="px-1 bg-slate-200 rounded font-mono">Tabulador</kbd> al inicio del párrafo (1.27 cm en norma APA).</li>
+                            <li><b>Alineación:</b> Utiliza <b>Justificado (<kbd class="px-1 bg-slate-200 rounded font-mono">Ctrl + J</kbd>)</b> en el cuerpo de tus ensayos para mantener los márgenes rectos.</li>
+                            <li><b>Interlineado:</b> Ajusta el espacio a 1.5 o 2.0 (Doble) desde el menú <i>Párrafo</i> en la cinta superior.</li>
+                            <li><b>Sangría:</b> Presiona la tecla <kbd class="px-1 bg-slate-200 rounded font-mono">Tab</kbd> al inicio de cada nuevo párrafo para aplicar la sangría estándar.</li>
                         </ol>
                     </div>
 
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
                         <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-wand-magic-sparkles text-blue-600"></i> Estilos y Tablas de Contenido
+                            <i class="fa-solid fa-wand-magic-sparkles text-blue-600"></i> Índice Automático
                         </h3>
                         <ol class="text-xs text-slate-600 space-y-2 list-decimal list-inside">
-                            <li><b>Aplicar Estilos Rápidos:</b> Selecciona los títulos principales y haz clic en <b>Título 1</b> en la galería de Estilos. Para subtítulos, usa <b>Título 2</b>.</li>
-                            <li><b>Generar Índice Automático:</b> Coloca el cursor donde desees el índice, ve a la pestaña <b>Referencias</b> > <b>Tabla de contenido</b> > elige <i>Tabla automática 1</i>.</li>
-                            <li><b>Modificar Colores de Estilos:</b> Haz clic derecho sobre el estilo "Título 1" > <i>Modificar</i> > Cambia el color de la letra, tamaño o fuente para aplicarlo a todo el documento simultáneamente.</li>
+                            <li><b>Marcar Encabezados:</b> Asigna el estilo <b>Título 1</b> a los temas principales y <b>Título 2</b> a los subtítulos.</li>
+                            <li><b>Insertar Tabla:</b> Colócate en una página en blanco al principio y dirígete a <b>Referencias > Tabla de contenido</b>.</li>
+                            <li><b>Actualización:</b> Haz clic derecho sobre el índice generado y selecciona "Actualizar campos" si modificas la cantidad de páginas.</li>
                         </ol>
                     </div>
                 </div>
@@ -173,77 +191,69 @@
                 <!-- Simulador / Previsualizador Interactivo de Texto -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
                     <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-eye text-blue-600"></i> Taller Interactivo: Experimenta con el Formato de Texto
+                        <i class="fa-solid fa-eye text-blue-600"></i> Taller de Prueba: Vista Previa de Formato
                     </h3>
-                    <p class="text-xs text-slate-600 mb-4">Ajusta los controles para ver en tiempo real cómo cambia el aspecto visual del documento en Microsoft Word:</p>
+                    <p class="text-xs text-slate-600 mb-4">Utiliza los siguientes controles para verificar visualmente los cambios antes de imprimir o enviar tus tareas:</p>
                     
                     <div class="grid md:grid-cols-4 gap-3 mb-4 bg-white p-3 rounded-xl border border-slate-200">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Color de Letra</label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Color de Fuente</label>
                             <input type="color" id="demo-text-color" value="#1e293b" onchange="actualizarDemoWord()" class="w-full h-9 p-1 bg-white border border-slate-300 rounded-lg cursor-pointer">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tipo de Fuente</label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tipografía</label>
                             <select id="demo-text-font" onchange="actualizarDemoWord()" class="w-full p-2 bg-white border border-slate-300 rounded-lg text-xs font-medium">
-                                <option value="Inter, sans-serif">Inter (Sans-Serif)</option>
-                                <option value="Times New Roman, serif">Times New Roman (Serif)</option>
-                                <option value="Arial, sans-serif">Arial (Moderna)</option>
-                                <option value="Courier New, monospace">Courier New (Código/Escribanía)</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="Times New Roman, serif">Times New Roman</option>
+                                <option value="Inter, sans-serif">Inter</option>
+                                <option value="Courier New, monospace">Courier New</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tamaño de Fuente</label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tamaño</label>
                             <select id="demo-text-size" onchange="actualizarDemoWord()" class="w-full p-2 bg-white border border-slate-300 rounded-lg text-xs font-medium">
-                                <option value="12px">12 px (Pequeño)</option>
-                                <option value="16px" selected>16 px (Estándar 12pt)</option>
-                                <option value="20px">20 px (Encabezado)</option>
-                                <option value="24px">24 px (Título Tesis)</option>
+                                <option value="14px">14 px (Notas / Pie de página)</option>
+                                <option value="16px" selected>16 px (Texto base / Parrafos)</option>
+                                <option value="20px">20 px (Subtítulos)</option>
+                                <option value="24px">24 px (Título principal)</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Alineación</label>
                             <select id="demo-text-align" onchange="actualizarDemoWord()" class="w-full p-2 bg-white border border-slate-300 rounded-lg text-xs font-medium">
                                 <option value="left">Izquierda</option>
+                                <option value="justify" selected>Justificado</option>
                                 <option value="center">Centrado</option>
                                 <option value="right">Derecha</option>
-                                <option value="justify">Justificado</option>
                             </select>
                         </div>
                     </div>
 
                     <!-- Vista Previa de la Hoja -->
                     <div id="word-preview-box" class="p-6 bg-white border border-slate-300 rounded-xl shadow-inner min-h-[120px] transition-all">
-                        <h4 id="demo-preview-title" class="font-bold mb-2">Título de Ejemplo en Microsoft Word</h4>
+                        <h4 id="demo-preview-title" class="font-bold mb-2">Introducción a la Informática Educativa</h4>
                         <p id="demo-preview-p" class="leading-relaxed">
-                            Este es un párrafo de muestra. Puedes cambiar el color de la tipografía, ajustar el tamaño del texto, seleccionar la alineación adecuada y observar cómo la jerarquía visual transforma la presentación de tu reporte escolar o académico.
+                            Este espacio sirve para revisar la legibilidad de tus redacciones. Asegúrate de mantener una jerarquía clara en los títulos y un tamaño adecuado en la tipografía para facilitar la revisión del examen o proyecto.
                         </p>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6 pt-2">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <h3 class="font-semibold text-slate-700 mb-2"><i class="fa-solid fa-check-circle text-blue-500 mr-2"></i>Normativa APA 7ª Edición y Tipografía Académica</h3>
+                        <h3 class="font-semibold text-slate-700 mb-2"><i class="fa-solid fa-check-circle text-blue-500 mr-2"></i>Criterios de Formato APA (Entregables)</h3>
                         <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside">
-                            <li><b>Geometría de Página:</b> Márgenes estrictos de 2.54 cm (1 pulgada) en los cuatro bordes. Encabezado alineado a la derecha con numeración arábiga limpia sin el prefijo "pág.".</li>
-                            <li><b>Tipografías Aceptadas:</b> Fuentes Serif (Times New Roman 12pt, Georgia 11pt) o Sans-Serif (Calibri 11pt, Arial 11pt, Lucida Sans Unicode 10pt) mantenidas homogéneamente.</li>
-                            <li><b>Interlineado y Sangría:</b> Interlineado exacto de 2.0 (doble) sin espaciado adicional entre párrafos. Sangría de primera línea obligatoria de 1.27 cm (0.5 pulgadas) mediante regla o menú Párrafo (no tabuladores dobles).</li>
-                            <li><b>Niveles de Encabezados:</b> 
-                                <br><span class="text-xs text-slate-500 font-mono">Nivel 1: Centrado, Negrita, Título de Encabezado</span>
-                                <br><span class="text-xs text-slate-500 font-mono">Nivel 2: Alineado a la izquierda, Negrita</span>
-                                <br><span class="text-xs text-slate-500 font-mono">Nivel 3: Alineado a la izquierda, Negrita, Cursiva</span>
-                            </li>
+                            <li><b>Márgenes:</b> Establecer 2.54 cm en los cuatro bordes (Izquierdo, Derecho, Superior, Inferior).</li>
+                            <li><b>Numeración:</b> Esquina superior derecha de cada hoja en números arábigos.</li>
+                            <li><b>Interlineado:</b> 2.0 (Doble espacio) sin agregar renglones extra entre párrafos.</li>
+                            <li><b>Encabezados:</b> Nivel 1 en negrita y centrado; Nivel 2 alineado a la izquierda.</li>
                         </ul>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <h3 class="font-semibold text-slate-700 mb-2"><i class="fa-solid fa-list-ol text-blue-500 mr-2"></i>Automatización Editorial y Estructura Técnica</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-2">
-                            Optimiza la maquetación de tesis y documentos complejos mediante funciones nativas avanzadas:
-                        </p>
+                        <h3 class="font-semibold text-slate-700 mb-2"><i class="fa-solid fa-list-ol text-blue-500 mr-2"></i>Recomendaciones del Docente</h3>
                         <ol class="text-sm text-slate-600 space-y-2 list-decimal list-inside">
-                            <li><b>Saltos de Sección Desvinculados:</b> Usa <i>Disposición > Saltos > Sección Siguiente</i> para alternar entre orientación Vertical/Horizontal o cambiar encabezados/pies de página interrumpiendo la opción "Vincular al anterior".</li>
-                            <li><b>Gestor de Citas e Inserción XML:</b> En la pestaña <i>Referencias > Insertar cita > Agregar nueva fuente</i>, llena metadatos (ISBN, DOI, Autores corporativos) para generar la bibliografía automatizada según norma elegida.</li>
-                            <li><b>Tablas de Contenido e Ilustraciones:</b> Asigna estilos jerárquicos (Título 1 a Título 4) y genera tablas dinámicas. Usa <i>Insertar título</i> en imágenes para Tabla de Ilustraciones/Figuras con referencias cruzadas automatizadas.</li>
-                            <li><b>Modo Control de Cambios:</b> Activa <i>Revisar > Control de cambios</i> para auditoría técnica de ediciones, comentarios cruzados e integración de correcciones académicas.</li>
+                            <li>Guarda tu archivo con tu nombre y grupo (ejemplo: <i>Perez_Juan_3B_Practica1.docx</i>).</li>
+                            <li>Utiliza el corrector ortográfico antes de imprimir (<kbd class="px-1 bg-slate-200 rounded font-mono">F7</kbd> en Word).</li>
+                            <li>Exporta a formato PDF si vas a subir tu trabajo a la plataforma escolar para evitar que se desacomoden las imágenes.</li>
                         </ol>
                     </div>
                 </div>
@@ -590,77 +600,77 @@
                 <div class="flex items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100 flex-wrap">
                     <div class="flex items-center gap-3">
                         <div class="bg-indigo-600 text-white p-3 rounded-xl shadow-sm">
-                            <i class="fa-solid fa-user-graduate text-2xl"></i>
+                            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
                         </div>
                         <div>
-                            <h2 class="text-xl font-bold text-slate-800">Centro de Resolver Dudas y Asesoría</h2>
-                            <p class="text-sm text-slate-500">Obtén explicaciones paso a paso, ejercicios y apoyo para tus trabajos académicos</p>
+                            <h2 class="text-xl font-bold text-slate-800">Dudas de Clase y Asesoría con el Prof. Juan</h2>
+                            <p class="text-sm text-slate-500">Haz tus preguntas sobre los temas vistos en el laboratorio o pide ejemplos resueltos</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="limpiarHistorialChat()" title="Borrar conversación" class="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-medium transition-all flex items-center gap-1">
-                            <i class="fa-solid fa-trash-can"></i> Limpiar Chat
+                            <i class="fa-solid fa-trash-can"></i> Reiniciar Chat
                         </button>
                         <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1">
                             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                            Asesor Activo
+                            Asesoría Disponible
                         </span>
                     </div>
                 </div>
 
                 <!-- Selector de Roles / Modos de Trabajo -->
                 <div class="mb-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <span class="text-xs font-bold text-slate-600 block mb-2"><i class="fa-solid fa-sliders text-indigo-600 mr-1"></i> Modo de Ayuda:</span>
+                    <span class="text-xs font-bold text-slate-600 block mb-2"><i class="fa-solid fa-sliders text-indigo-600 mr-1"></i> ¿Qué necesitas realizar?</span>
                     <div class="flex flex-wrap gap-2" id="ai-mode-container">
                         <button onclick="setAIMode('explicar', this)" class="mode-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all flex items-center gap-1">
-                            <i class="fa-solid fa-chalkboard-user"></i> Explicación Pedagógica
+                            <i class="fa-solid fa-chalkboard-user"></i> Explicación Sencilla
                         </button>
                         <button onclick="setAIMode('ejercicio', this)" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1">
-                            <i class="fa-solid fa-code"></i> Generar Ejercicio Práctico
+                            <i class="fa-solid fa-code"></i> Ejemplo de Ejercicio
                         </button>
                         <button onclick="setAIMode('evaluar', this)" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1">
-                            <i class="fa-solid fa-file-signature"></i> Revision de Texto / Código
+                            <i class="fa-solid fa-file-signature"></i> Revisión de Párrafo / Texto
                         </button>
                         <button onclick="setAIMode('quiz_generador', this)" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1">
-                            <i class="fa-solid fa-circle-question"></i> Ejercicios de Repaso
+                            <i class="fa-solid fa-circle-question"></i> Preguntas para Estudiar
                         </button>
                     </div>
                 </div>
 
                 <!-- Sugerencias Temáticas Avanzadas -->
                 <div class="mb-4">
-                    <p class="text-xs font-semibold text-slate-500 mb-2">Consultas frecuentes e interacción rápida:</p>
+                    <p class="text-xs font-semibold text-slate-500 mb-2">Consultas habituales de los alumnos:</p>
                     <div class="flex flex-wrap gap-2">
-                        <button onclick="usarSugerencia('RAM vs ROM vs SSD')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            📊 RAM vs ROM vs Disco
+                        <button onclick="usarSugerencia('¿Cuál es la diferencia entre memoria RAM y el Disco Duro?')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
+                            📊 RAM vs Disco Duro
                         </button>
-                        <button onclick="usarSugerencia('Como usar BUSCARV y XLOOKUP en Excel')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            📈 Función BUSCARV
+                        <button onclick="usarSugerencia('¿Cómo aplico la fórmula PROMEDIO y la función SI en mi lista de calificaciones?')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
+                            📈 Promedios en Excel
                         </button>
-                        <button onclick="usarSugerencia('Dame un ejercicio práctico de Python')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
+                        <button onclick="usarSugerencia('Dame un ejemplo básico de condicionales en Python')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
                             🐍 Ejercicio en Python
                         </button>
-                        <button onclick="usarSugerencia('Preguntas sobre Ciberseguridad y Phishing')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
-                            🛡️ Quiz Ciberseguridad
+                        <button onclick="usarSugerencia('¿Cómo identificar correos falsos o de Phishing?')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
+                            🛡️ Identificar Phishing
                         </button>
-                        <button onclick="usarSugerencia('Formato APA 7 para portadas y citas')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
+                        <button onclick="usarSugerencia('¿Cuáles son las reglas básicas de formato APA 7 para mi entrega?')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 rounded-lg text-xs font-medium transition-all">
                             📄 Reglas Formato APA 7
                         </button>
                     </div>
                 </div>
 
                 <!-- Ventana del Chat -->
-                <div id="ai-chat-history" class="h-[420px] overflow-y-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-4 mb-4">
+                <div id="ai-chat-history" class="h-[420px] overflow-y-auto custom-scrollbar bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-4 mb-4">
                     <div class="flex gap-3 items-start">
                         <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold">
-                            <i class="fa-solid fa-graduation-cap text-xs"></i>
+                            <i class="fa-solid fa-user-tie text-xs"></i>
                         </div>
                         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm max-w-[85%] text-slate-700 leading-relaxed text-sm ai-formatted-content">
-                            ¡Hola! Bienvenido al <b>Asesor Educativo de Computación</b>. <br>
-                            Estoy aquí para ayudarte a resolver tus dudas sobre informática de forma rápida y sencilla.
-                            <ul class="mt-2 space-y-1 list-disc list-inside">
-                                <li>Pregunta sobre <b>Word, Excel, PowerPoint, Hardware, Redes o Programación</b>.</li>
-                                <li>Usa las pestañas de arriba para solicitar <b>Ejercicios</b>, <b>Revisiones</b> o <b>Cuestionarios de Práctica</b>.</li>
+                            ¡Qué tal jóvenes! Bienvenidos al espacio de asesoría de Informática. <br>
+                            Escriban aquí cualquier duda concreta sobre sus prácticas de laboratorio, problemas con fórmulas de Excel o formato de sus entregas en Word.
+                            <ul class="mt-2 space-y-1 list-disc list-inside text-xs text-slate-600">
+                                <li>Revisen la pestaña de atajos si tienen dudas sobre teclas rápidas.</li>
+                                <li>Pueden pedirme ejemplos sencillos de lógica de programación o aclaraciones sobre el examen.</li>
                             </ul>
                         </div>
                     </div>
@@ -668,9 +678,9 @@
 
                 <!-- Campo de Entrada -->
                 <form onsubmit="enviarPreguntaIA(event)" class="flex gap-2">
-                    <input type="text" id="ai-input" placeholder="Escribe tu duda sobre Word, Excel, Python, Hardware, Redes, etc..." class="flex-grow p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="text" id="ai-input" placeholder="Escribe aquí tu duda sobre las prácticas..." class="flex-grow p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <button type="submit" id="ai-send-btn" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-sm transition-all flex items-center gap-2 text-sm shrink-0">
-                        <span>Consultar</span>
+                        <span>Preguntar</span>
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
                 </form>
@@ -679,127 +689,143 @@
 
         <!-- PESTAÑA: CÓDIGO QR -->
         <section id="content-qr" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center max-w-lg mx-auto">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-lg mx-auto text-center">
                 <div class="inline-flex bg-rose-100 text-rose-600 p-4 rounded-2xl mb-3">
                     <i class="fa-solid fa-qrcode text-3xl"></i>
                 </div>
-                <h2 class="text-xl font-bold text-slate-800 mb-1">Código QR del Sitio Web</h2>
-                <p class="text-sm text-slate-500 mb-6">Escanea este código con la cámara de tu teléfono móvil para acceder directamente a la plataforma.</p>
+                <h2 class="text-xl font-bold text-slate-800 mb-1">Compartir este Portal con tus Compañeros</h2>
+                <p class="text-xs text-slate-500 mb-6">Escanea el código QR desde la cámara de tu teléfono para acceder rápidamente al material de apoyo y simuladores.</p>
 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 inline-block mb-4">
-                    <div id="qrcode-container" class="flex justify-center items-center min-h-[200px]"></div>
+                <div class="flex justify-center mb-4">
+                    <div id="qrcode-container" class="p-4 bg-white border-2 border-slate-200 rounded-2xl shadow-sm inline-block"></div>
                 </div>
 
-                <p id="qr-url-text" class="text-xs font-mono text-slate-500 break-all bg-slate-100 p-2 rounded-lg"></p>
+                <p class="text-xs text-slate-400 font-mono break-all px-4" id="qr-url-text"></p>
             </div>
         </section>
 
-        <!-- PESTAÑA: INSTALAR APP / APK PWA -->
+        <!-- PESTAÑA: DESCARGAR APP / PWA -->
         <section id="content-descargar" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl">
-                        <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-xl mx-auto text-center">
+                <div class="inline-flex bg-emerald-100 text-emerald-600 p-4 rounded-2xl mb-3">
+                    <i class="fa-solid fa-mobile-screen-button text-3xl"></i>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-1">Guarda el Portal en tu Teléfono o Computadora</h2>
+                <p class="text-xs text-slate-500 mb-6">Puedes utilizar este material incluso cuando no tengas conexión a internet en la escuela.</p>
+
+                <div class="grid sm:grid-cols-2 gap-4 mb-6 text-left">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-xs mb-2 flex items-center gap-1.5">
+                            <i class="fa-brands fa-android text-emerald-600 text-sm"></i> En Android / Chrome
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Presiona los 3 puntos superiores de tu navegador y elige <b>"Agregar a la pantalla principal"</b>.</p>
                     </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">Instalar en Teléfono / Descargar la App</h2>
-                        <p class="text-sm text-slate-500">Convierte este sitio en una App móvil (PWA) sin necesidad de tienda de aplicaciones</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-xs mb-2 flex items-center gap-1.5">
+                            <i class="fa-brands fa-apple text-slate-800 text-sm"></i> En iPhone / Safari
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Toca el botón <b>Compartir</b> (el cuadro con una flecha hacia arriba) y selecciona <b>"Agregar a inicio"</b>.</p>
                     </div>
                 </div>
 
-                <!-- Opciones de descarga/instalación -->
-                <div class="grid md:grid-cols-2 gap-4 mb-6">
-                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide flex items-center gap-1 mb-2">
-                                <i class="fa-brands fa-android text-base"></i> Opción 1: Instalar en Android / Móvil
-                            </span>
-                            <h3 class="font-bold text-slate-800 mb-2">Aplicación Web Progresiva (PWA)</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                                En Android / Chrome, puedes guardar la aplicación directamente en la pantalla de inicio para usarla como una aplicación nativa completa sin Internet.
-                            </p>
-                            <ol class="text-xs text-slate-600 space-y-1.5 list-decimal list-inside mb-4">
-                                <li>Abre el menú del navegador (3 puntos en la esquina superior derecha).</li>
-                                <li>Selecciona <b>"Agregar a la pantalla principal"</b> o <b>"Instalar aplicación"</b>.</li>
-                                <li>¡Listo! Aparecerá un icono directo en tus aplicaciones de Android.</li>
-                            </ol>
-                        </div>
-                        <button onclick="instalarPWA()" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-download"></i> Instalar Aplicación Ahora
-                        </button>
-                    </div>
-
-                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wide flex items-center gap-1 mb-2">
-                                <i class="fa-solid fa-file-arrow-down text-base"></i> Opción 2: Descargar Archivo Autónomo
-                            </span>
-                            <h3 class="font-bold text-slate-800 mb-2">Archivo Offline (.html)</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                                Descarga todo el contenido educativo e interactivo en un único archivo. Funciona sin necesidad de estar conectado a Internet en cualquier computadora o teléfono.
-                            </p>
-                        </div>
-                        <button onclick="descargarCodigoPagina()" class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-file-code"></i> Descargar HTML Completo
-                        </button>
-                    </div>
-                </div>
+                <button onclick="instalarPWA()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-sm transition-all inline-flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Instrucciones de Instalación
+                </button>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs mt-auto">
-        <div class="max-w-7xl mx-auto px-4">
-            <p>© 2026 CompuPrep 181 - Portal Educativo de Apoyo Estudiantil</p>
-            <p class="mt-1 text-slate-500">Diseñado para la enseñanza práctica de informática y herramientas ofimáticas.</p>
+    <!-- Pie de página -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
+            <p class="font-medium text-slate-300">CompuPrep 181 — Material Educativo de Apoyo para Informática I y II</p>
+            <p class="text-slate-500">Diseñado para facilitar la práctica en laboratorio y la preparación de evaluaciones escolares.</p>
         </div>
     </footer>
 
-    <!-- LÓGICA JAVASCRIPT COMPLETA Y UNIFICADA -->
+    <!-- Modal personalizado para notificaciones -->
+    <div id="custom-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl border border-slate-200">
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-circle-info text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-2" id="modal-title">Aviso</h3>
+                <p class="text-sm text-slate-600 mb-6" id="modal-message"></p>
+                <button onclick="cerrarModalCustom()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-sm transition-all">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LÓGICA JAVASCRIPT COMPLETA Y REVISADA -->
     <script>
-        // VARIABLE GLOBAL DE MODO DE ASESORÍA
+        // MODO ACTUAL DE ASESORÍA
         let aiCurrentMode = 'explicar';
 
-        // GESTIÓN DE PESTAÑAS (DEFINICIÓN GLOBAL)
+        // FUNCION DE ESCAPE DE HTML
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        // NAVEGACIÓN ENTRE PESTAÑAS
         window.changeTab = function(tabName) {
-            // Ocultar todos los contenidos
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('block');
-            });
+            contents.forEach(c => c.classList.add('hidden'));
 
-            // Desactivar todos los botones
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Mostrar contenido seleccionado
-            const activeContent = document.getElementById('content-' + tabName);
-            if (activeContent) {
-                activeContent.classList.remove('hidden');
-                activeContent.classList.add('block');
+            const selectedContent = document.getElementById('content-' + tabName);
+            if (selectedContent) {
+                selectedContent.classList.remove('hidden');
             }
 
-            // Activar botón seleccionado
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
             const activeBtn = document.getElementById('tab-' + tabName);
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
 
-            // Generar QR si entra a la pestaña de QR
             if (tabName === 'qr') {
                 generarCodigoQR();
             }
         };
 
-        // SIMULADOR DE FORMATO DE WORD EN TIEMPO REAL
+        // SISTEMA DE MODAL PERSONALIZADO
+        window.mostrarModalCustom = function(titulo, mensaje) {
+            const modal = document.getElementById('custom-modal');
+            const titleElem = document.getElementById('modal-title');
+            const msgElem = document.getElementById('modal-message');
+            if (modal && titleElem && msgElem) {
+                titleElem.textContent = titulo;
+                msgElem.textContent = mensaje;
+                modal.classList.remove('hidden');
+            }
+        };
+
+        window.cerrarModalCustom = function() {
+            const modal = document.getElementById('custom-modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.instalarPWA = function() {
+            mostrarModalCustom(
+                "Instalación en Teléfonos Móviles",
+                "Para guardar el portal en tu pantalla de inicio: Presiona el menú de 3 puntos en la esquina superior derecha de Chrome y selecciona 'Agregar a la pantalla principal'."
+            );
+        };
+
+        // SIMULADOR DE FORMATO DE WORD
         window.actualizarDemoWord = function() {
-            const color = document.getElementById('demo-text-color').value;
-            const font = document.getElementById('demo-text-font').value;
-            const size = document.getElementById('demo-text-size').value;
-            const align = document.getElementById('demo-text-align').value;
+            const color = document.getElementById('demo-text-color')?.value || '#1e293b';
+            const font = document.getElementById('demo-text-font')?.value || 'Arial, sans-serif';
+            const size = document.getElementById('demo-text-size')?.value || '16px';
+            const align = document.getElementById('demo-text-align')?.value || 'justify';
 
             const previewBox = document.getElementById('word-preview-box');
             if (previewBox) {
@@ -880,7 +906,7 @@
             renderizarAtajos(filtrados);
         };
 
-        // DESAFÍO DE ATAJOS (MINIJUAGO)
+        // MINIJUÉGO DE VELOCIDAD
         const preguntasJuego = [
             { q: "¿Qué atajo usas para copiar un texto seleccionado?", options: ["Ctrl + C", "Ctrl + V", "Ctrl + X", "Ctrl + Z"], correct: 0 },
             { q: "¿Con qué combinación de teclas pegas el contenido del portapapeles?", options: ["Ctrl + P", "Ctrl + V", "Ctrl + G", "Alt + Tab"], correct: 1 },
@@ -979,12 +1005,12 @@
             if (opcionSel === qActual.correct) {
                 juegoPuntos++;
                 if (feedElem) {
-                    feedElem.textContent = "¡Correcto! Excelentes reflejos.";
+                    feedElem.textContent = "¡Bien hecho! Respuesta correcta.";
                     feedElem.className = "min-h-[2.5rem] flex items-center justify-center text-sm font-bold text-emerald-600";
                 }
             } else {
                 if (feedElem) {
-                    feedElem.textContent = `Incorrecto. La respuesta era: ${qActual.options[qActual.correct]}`;
+                    feedElem.textContent = `Opcional no acertada. La respuesta es: ${qActual.options[qActual.correct]}`;
                     feedElem.className = "min-h-[2.5rem] flex items-center justify-center text-sm font-bold text-rose-600";
                 }
             }
@@ -992,10 +1018,10 @@
             setTimeout(() => {
                 juegoIndice++;
                 cargarPreguntaJuego();
-            }, 1500);
+            }, 1400);
         }
 
-        // QUIZ EVALUATIVO COMPLETO
+        // QUIZ EVALUATIVO
         const preguntasQuiz = [
             { title: "1. En Microsoft Word, ¿cuál es el margen predeterminado exigido en formato APA 7ª Edición?", options: ["1.5 cm en todos los bordes", "2.54 cm (1 pulgada) en los 4 bordes", "3.0 cm lateral y 2.0 cm vertical", "Sin márgenes"], correct: 1 },
             { title: "2. ¿Qué función de Excel se utiliza para calcular la suma de una columna entera?", options: ["=TOTAL()", "=SUMAR.CELDAS()", "=SUMA()", "=CALCULAR.SUMA()"], correct: 2 },
@@ -1054,7 +1080,7 @@
             }
         };
 
-        // ASESOR EDUCATIVO Y ATENCIÓN DE DUDAS
+        // ASESOR DOCENTE - RESPUESTAS HUMANIZADAS Y NATURALES
         window.setAIMode = function(modo, btnElement) {
             aiCurrentMode = modo;
             const buttons = document.querySelectorAll('#ai-mode-container button');
@@ -1083,12 +1109,65 @@
                             <i class="fa-solid fa-graduation-cap text-xs"></i>
                         </div>
                         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm max-w-[85%] text-slate-700 leading-relaxed text-sm ai-formatted-content">
-                            ¡Chat reiniciado! ¿En qué otra duda sobre informática te puedo colaborar?
+                            Listo, he reiniciado la conversación. ¿Qué otra duda tienes sobre las prácticas?
                         </div>
                     </div>
                 `;
             }
         };
+
+        function generarRespuestaProfesorHumanizada(prompt, modo) {
+            const q = prompt.toLowerCase();
+
+            if (modo === 'evaluar') {
+                return `Hola. Estuve revisando lo que escribiste ("${escapeHTML(prompt)}").\n\n` +
+                       `En general vas bien encaminado. Tu idea principal se entiende perfectamente, aunque te sugiero organizar el texto en párrafos de no más de 4 o 5 renglones para que no se sienta tan pesado de leer al momento de la entrega.\n\n` +
+                       `No olvides verificar la alineación justificada en Word antes de mandar tu archivo y asegurarte de aplicar sangría en la primera línea. Con esos detalles te queda listo.`;
+            }
+
+            if (modo === 'quiz_generador') {
+                return `Aquí tienes un par de preguntas rápidas sobre **${escapeHTML(prompt)}** para que ensayes antes del examen:\n\n` +
+                       `**1.** ¿Para qué sirve principalmente esta función en tus tareas del laboratorio?\n` +
+                       `- A) Para que la computadora procese y organice la información de forma ordenada.\n` +
+                       `- B) Para acelerar el internet de la máquina.\n` +
+                       `- C) Para eliminar archivos temporales.\n\n` +
+                       `*(Piénsala bien: la respuesta correcta es la A).*`;
+            }
+
+            if (modo === 'ejercicio') {
+                if (q.includes('excel') || q.includes('formula') || q.includes('promedio')) {
+                    return `Mira, la manera más fácil de practicar esto en Excel es haciendo una tabla rápida:\n\n` +
+                           `1. Pon las materias o parciales en las primeras columnas (A y B).\n` +
+                           `2. En la columna C pon la fórmula para revisar si pasaste:\n` +
+                           `   \`=SI(PROMEDIO(A2:B2)>=6, "Aprobado", "Reprobado")\`\n\n` +
+                           `Pruébalo en tu hoja y verás cómo cambia el mensaje de manera automática según la nota que ingreses.`;
+                }
+                return `Te dejo un ejemplo sencillo de cómo se vería la lógica en código Python:\n\n` +
+                       `\`\`\`python\n# Ejemplo sencillo de evaluación\ncalificacion = 7.5\n\nif calificacion >= 6.0:\n    print("Pasa a la siguiente unidad")\nelse:\n    print("Presenta examen extraordinario")\n\`\`\`\n\n` +
+                       `Irás viendo cómo la estructura \`if / else\` toma decisiones según el valor numérico.`;
+            }
+
+            if (q.includes('ram') || q.includes('rom') || q.includes('disco') || q.includes('hardware')) {
+                return `Esa duda surge muy seguido en clase. La forma más clara de distinguirlos es pensar en tu escritorio físico:\n\n` +
+                       `- La **memoria RAM** es la parte superior del escritorio donde pones las libretas abiertas mientras trabajas. Si el escritorio es grande, puedes tener varios libros abiertos a la vez. Cuando terminas y apagas la luz (o apagas la PC), la mesa queda vacía.\n` +
+                       `- El **disco duro** es la mochila o el cajón. Ahí guardas tus cosas bien guardadas para encontrarlas al día siguiente.\n` +
+                       `- La **ROM** son las instrucciones pegadas en la pata del escritorio desde que lo compraste; nadie las borra ni las cambia.`;
+            }
+
+            if (q.includes('excel') || q.includes('buscarv') || q.includes('si')) {
+                return `Para las prácticas de Excel te sugiero memorizar estas cuatro herramientas básicas:\n\n` +
+                       `- \`=SUMA(rango)\`: Para no andar sumando celda por celda.\n` +
+                       `- \`=PROMEDIO(rango)\`: Saca la media de tus calificaciones al instante.\n` +
+                       `- \`=SI(condicion, si_cumple, si_no)\`: Excelente para poner marcas automáticas de 'Aprobado' o 'Reprobado'.\n` +
+                       `- \`=BUSCARV()\`: Para traer datos de otra tabla buscando un código o nombre.`;
+            }
+
+            return `Sobre tu duda de **"${escapeHTML(prompt)}"**:\n\n` +
+                   `Te recomiendo revisar las pestañas fijas de nuestro portal según el tema de tu práctica:\n` +
+                   `- Si es para dar formato a tus textos, en la pestaña **Word** están las reglas de sangría e índices.\n` +
+                   `- Para fórmulas o tablas de calificaciones, apóyate en la pestaña **Excel**.\n` +
+                   `- Y si tienes dudas con los comandos rápidos, revisa la tabla de **Atajos de Teclado**.`;
+        }
 
         window.enviarPreguntaIA = function(event) {
             event.preventDefault();
@@ -1099,7 +1178,6 @@
             const pregunta = input.value.trim();
             if (!pregunta) return;
 
-            // Agregar mensaje del usuario
             const userMsgDiv = document.createElement('div');
             userMsgDiv.className = "flex gap-3 items-start justify-end";
             userMsgDiv.innerHTML = `
@@ -1115,9 +1193,8 @@
             input.value = '';
             history.scrollTop = history.scrollHeight;
 
-            // Generar respuesta simulada
             setTimeout(() => {
-                const respuestaMD = generarRespuestaLocalCompleta(pregunta, aiCurrentMode);
+                const respuestaMD = generarRespuestaProfesorHumanizada(pregunta, aiCurrentMode);
                 const respuestaHTML = typeof marked !== 'undefined' ? marked.parse(respuestaMD) : respuestaMD;
 
                 const botMsgDiv = document.createElement('div');
@@ -1132,73 +1209,8 @@
                 `;
                 history.appendChild(botMsgDiv);
                 history.scrollTop = history.scrollHeight;
-            }, 400);
+            }, 300);
         };
-
-        function generarRespuestaLocalCompleta(prompt, modo) {
-            const q = prompt.toLowerCase();
-
-            if (modo === 'evaluar') {
-                return `### 📝 Revisión y Comentarios del Profesor\n\n` +
-                       `**Análisis del contenido:** "${escapeHTML(prompt)}"\n\n` +
-                       `* **Puntuación estimada:** 8.5 / 10\n` +
-                       `* **Puntos Fuertes:** Estructura clara y bien orientada a la informática básica.\n\n` +
-                       `#### 💡 Sugerencias de mejora:\n` +
-                       `1. **Claridad Sintáctica:** Intenta resumir las ideas principales en párrafos cortos.\n` +
-                       `2. **Formato Visual:** Resalta conceptos clave utilizando negritas o listas ordenadas.\n` +
-                       `3. **Normativa:** Si citas algún autor o sitio web, asegúrate de aplicar el formato APA correspondiente.`;
-            }
-
-            if (modo === 'quiz_generador') {
-                return `### 🎯 Ejercicios de Repaso: *${escapeHTML(prompt)}*\n\n` +
-                       `**Pregunta 1:** ¿Cuál es el propósito fundamental al trabajar con este concepto?\n` +
-                       `- [ ] A) Modificar la velocidad del procesador\n` +
-                       `- [x] B) Organizar la información para su correcto procesamiento\n` +
-                       `- [ ] C) Eliminar los respaldos del equipo\n\n` +
-                       `**Pregunta 2:** ¿Qué recomendación práctica se debe aplicar siempre?\n` +
-                       `- [x] A) Guardar frecuentemente los cambios realizados\n` +
-                       `- [ ] B) Desconectar el internet al trabajar\n` +
-                       `- [ ] C) Desactivar las alertas de seguridad del sistema`;
-            }
-
-            if (modo === 'ejercicio') {
-                if (q.includes('excel') || q.includes('formula') || q.includes('promedio')) {
-                    return `### 🛠️ Ejercicio Práctico paso a paso en Excel\n\n` +
-                           `1. Abre una hoja en blanco y coloca los siguientes encabezados en la fila 1: \`Alumno\`, \`Calificación\` y \`Estado\`.\n` +
-                           `2. En la celda C2 ingresa la siguiente fórmula condicional:\n\n` +
-                           `\`\`\`excel\n=SI(B2>=6, "APROBADO", "REPROBADO")\n\`\`\`\n\n` +
-                           `3. Copia la fórmula hacia abajo para aplicarla a toda la lista de estudiantes.`;
-                }
-                return `### 💻 Ejercicio de Programación (Python)\n\n` +
-                       `Escribe un programa sencillo para practicar condicionales:\n\n` +
-                       `\`\`\`python\n# Ejercicio de evaluación de promedio\ncalificacion = 8.5\n\nif calificacion >= 6.0:\n    print("El alumno ha aprobado el curso.")\nelse:\n    print("El alumno debe presentar examen de recuperación.")\n\`\`\``;
-            }
-
-            // Explicación Pedagógica
-            if (q.includes('ram') || q.includes('rom') || q.includes('disco') || q.includes('hardware')) {
-                return `### 🖥️ Memoria RAM vs Disco Duro vs ROM\n\n` +
-                       `Imagina tu mesa de estudio:\n\n` +
-                       `* **Memoria RAM:** Es la mesa donde pones tus libretas abiertas mientras trabajas. Entre más grande la mesa, más libros puedes consultar al mismo tiempo sin saturarte. Al terminar de estudiar y apagar la luz (apagar la PC), la mesa queda totalmente vacía.\n` +
-                       `* **Disco Duro (SSD/HDD):** Es tu mochila o archivero. Ahí guardas tus libros cerrados para utilizarlos al día siguiente. No se borra al apagar la computadora.\n` +
-                       `* **Memoria ROM:** Son las instrucciones impresas en la tapa del escritorio que te dicen cómo encender la lámpara. Vienen de fábrica y no se pueden modificar fácilmente.`;
-            }
-
-            if (q.includes('excel') || q.includes('buscarv') || q.includes('si')) {
-                return `### 📊 Funciones Esenciales de Microsoft Excel\n\n` +
-                       `* **=SUMA(A1:A10):** Suma todos los valores numéricos del rango indicado.\n` +
-                       `* **=PROMEDIO(B1:B5):** Obtiene la media aritmética del grupo de celdas.\n` +
-                       `* **=SI(condición, valor_verdadero, valor_falso):** Ejecuta una regla lógica. Por ejemplo: \`=SI(A1>=6, "Aprobado", "Reprobado")\`.\n` +
-                       `* **=BUSCARV(valor, tabla, columna, FALSO):** Busca un dato en la primera columna de una tabla y te devuelve la información de la misma fila.`;
-            }
-
-            return `### 🎓 Asesoría Educativa de Cómputo\n\n` +
-                   `Con respecto a tu consulta sobre **"${escapeHTML(prompt)}"**:\n\n` +
-                   `Recuerda que en el portal dispones de secciones dedicadas a:\n` +
-                   `- **Word:** Configuración de márgenes, tipografías e índices automatizados.\n` +
-                   `- **Excel:** Fórmulas condicionales, funciones de búsqueda y gráficos.\n` +
-                   `- **PowerPoint:** Reglas de diseño visual, contraste y animación.\n` +
-                   `- **Atajos de teclado:** Combinaciones de teclas para agilizar tus tareas.`;
-        }
 
         // CÓDIGO QR
         window.generarCodigoQR = function() {
@@ -1224,11 +1236,6 @@
             }
         };
 
-        // INSTALAR PWA / DESCARGAR CÓDIGO
-        window.instalarPWA = function() {
-            alert("Para instalar en Android / Chrome: Toca el menú de 3 puntos en la esquina superior derecha del navegador y selecciona 'Agregar a la pantalla principal'.");
-        };
-
         window.descargarCodigoPagina = function() {
             const htmlContent = document.documentElement.outerHTML;
             const blob = new Blob([htmlContent], { type: 'text/html' });
@@ -1242,14 +1249,7 @@
             URL.revokeObjectURL(url);
         };
 
-        function escapeHTML(str) {
-            if (!str) return '';
-            return String(str).replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-            );
-        }
-
-        // INICIALIZACIÓN AL CARGAR LA PÁGINA
+        // INICIALIZACIÓN
         window.addEventListener('DOMContentLoaded', function() {
             window.calcularPromedio();
             window.renderizarAtajos(listaAtajos);
@@ -1258,4 +1258,4 @@
         });
     </script>
 </body>
-</html>[Uploading '¿'¿.html…]()
+</html>
