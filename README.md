@@ -1,5 +1,5 @@
-[Uploading aprende_computaci_n_b_sica_preparatoria.html…]()
-# compu181<!DOCTYPE html>
+[aprende_computaci_n_b_sica_preparatoria (3.html](https://github.com/user-attachments/files/33849402/aprende_computaci_n_b_sica_preparatoria.3.html)
+<!DOCTYPE html>
 <html lang="es-MX" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
